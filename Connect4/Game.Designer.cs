@@ -1,6 +1,6 @@
 ﻿namespace Connect4
 {
-    partial class Game
+    partial class GameForm
     {
         /// <summary>
         /// Required designer variable.

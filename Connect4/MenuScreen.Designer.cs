@@ -45,6 +45,7 @@
             this.btnMatchmake.TabIndex = 0;
             this.btnMatchmake.Text = "Matchmake";
             this.btnMatchmake.UseVisualStyleBackColor = true;
+            this.btnMatchmake.Click += new System.EventHandler(this.btnMatchmake_Click);
             // 
             // label1
             // 

@@ -16,5 +16,11 @@ namespace Connect4
         {
             InitializeComponent();
         }
+
+        private void btnMatchmake_Click(object sender, EventArgs e)
+        {
+            GameForm gameForm = new GameForm();
+            gameForm.Show();
+        }
     }
 }
