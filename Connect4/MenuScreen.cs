@@ -8,17 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Connect4
-{
-    public partial class MenuScreen : Form
-    {
-        public MenuScreen()
-        {
+namespace Connect4 {
+    public partial class MenuScreen : Form {
+        public MenuScreen() {
             InitializeComponent();
         }
 
-        private void btnMatchmake_Click(object sender, EventArgs e)
-        {
+        private void btnMatchmake_Click(object sender, EventArgs e) {
             GameForm gameForm = new GameForm();
             gameForm.Show();
         }

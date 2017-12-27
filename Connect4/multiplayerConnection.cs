@@ -18,7 +18,7 @@ namespace Connect4
         {
             clientWebSocket = new ClientWebSocket();
 
-            serverUrl = new Uri(url); // Cast the string to the URL datatype
+            //serverUrl = new Uri(url); // Cast the string to the URL datatype
         }
 
         async public void Connect() => await clientWebSocket.ConnectAsync(serverUrl, System.Threading.CancellationToken.None); // Initiates connection

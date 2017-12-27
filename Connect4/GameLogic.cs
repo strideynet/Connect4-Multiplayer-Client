@@ -13,12 +13,10 @@ namespace Connect4
         private int localPlayer;
 
         private MultiplayerConnection multiplayerConnection;
-        private System.Windows.Forms.Panel gamePanel;
 
-        GameLogic(MultiplayerConnection multiplayerConnection, System.Windows.Forms.Panel gamePanel, int localPlayer)
+        public GameLogic(MultiplayerConnection multiplayerConnection, int localPlayer)
         {
             this.multiplayerConnection = multiplayerConnection;
-            this.gamePanel = gamePanel;
             this.localPlayer = localPlayer;
         }
 
@@ -29,6 +27,20 @@ namespace Connect4
         public void columnClick(int column)
         {
  
+        }
+
+        public int getFreeInColumn(int column)
+        {
+            // Loop through the rows to find the next avail slot
+            for (int y = 5; y >= 0; y--)
+            {
+                if (gameBoard[column, y] == 0)
+                {
+                    return y;
+                }
+            }
+
+            return -1;
         }
 
         /// <summary>

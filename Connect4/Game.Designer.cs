@@ -44,6 +44,7 @@
             this.pnlGraphics.Name = "pnlGraphics";
             this.pnlGraphics.Size = new System.Drawing.Size(881, 756);
             this.pnlGraphics.TabIndex = 0;
+            this.pnlGraphics.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlGraphics_MouseDown);
             this.pnlGraphics.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlGraphics_MouseMove);
             // 
             // label1
