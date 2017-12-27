@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connect4", "Connect4\Connect4.csproj", "{53D8C896-D773-4DDF-B8F1-FD22C271E26F}"
 EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "C4-Server", "C4-Server\C4-Server.njsproj", "{89EE55B4-DE02-45AB-8887-AFC79B852FEB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{53D8C896-D773-4DDF-B8F1-FD22C271E26F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53D8C896-D773-4DDF-B8F1-FD22C271E26F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53D8C896-D773-4DDF-B8F1-FD22C271E26F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89EE55B4-DE02-45AB-8887-AFC79B852FEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89EE55B4-DE02-45AB-8887-AFC79B852FEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89EE55B4-DE02-45AB-8887-AFC79B852FEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89EE55B4-DE02-45AB-8887-AFC79B852FEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

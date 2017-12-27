@@ -26,7 +26,7 @@ namespace Connect4 {
             gfx = pnlGraphics.CreateGraphics();
             p = new Pen(Color.Black);
 
-            gameLogic = new GameLogic(new MultiplayerConnection("www.com"), 5);
+            gameLogic = new GameLogic(new MultiplayerConnection("http://127.0.0.1:80/matchmaking"), 5);
 
             localTurn = true; // Debug
         }
@@ -60,15 +60,7 @@ namespace Connect4 {
                 int[,] gameBoard = gameLogic.getGameBoard();
                 int gamePositionX = resolveMousePosition().X;
 
-                int yFree = 0;
-
-                // Loop through the rows to find the next avail slot
-                for (int y = 5; y >= 0; y--) {
-                    if (gameBoard[gamePositionX, y] == 0) {
-                        yFree = y;
-                        break;
-                    }
-                }
+                int yFree = gameLogic.getFreeInColumn(gamePositionX);
 
                 drawCircle(new Rectangle(gamePositionX * 125 + 5, yFree * 125 + 5, 115, 115), Color.Blue, false);
             }
