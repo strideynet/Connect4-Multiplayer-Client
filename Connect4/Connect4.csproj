@@ -79,6 +79,9 @@
     <EmbeddedResource Include="Game.resx">
       <DependentUpon>GameForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GameForm.resx">
+      <DependentUpon>GameForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MenuScreen.resx">
       <DependentUpon>MenuScreen.cs</DependentUpon>
     </EmbeddedResource>

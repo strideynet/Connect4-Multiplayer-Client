@@ -44,6 +44,7 @@
             this.pnlGraphics.Name = "pnlGraphics";
             this.pnlGraphics.Size = new System.Drawing.Size(881, 756);
             this.pnlGraphics.TabIndex = 0;
+            this.pnlGraphics.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlGraphics_MouseMove);
             // 
             // label1
             // 
@@ -102,7 +103,7 @@
             this.btnAbandon.UseVisualStyleBackColor = true;
             this.btnAbandon.Click += new System.EventHandler(this.btnAbandon_Click);
             // 
-            // Game
+            // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -119,7 +120,7 @@
             this.MaximumSize = new System.Drawing.Size(1135, 817);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1135, 817);
-            this.Name = "Game";
+            this.Name = "GameForm";
             this.Text = "Connect 4 - Game In Progress";
             this.ResumeLayout(false);
             this.PerformLayout();

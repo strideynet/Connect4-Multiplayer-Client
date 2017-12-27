@@ -18,6 +18,8 @@ namespace Connect4
 
         private GameLogic gameLogic;
 
+        private int mouseX, mouseY;
+
         public bool localTurn;
 
         public GameForm()
@@ -26,6 +28,8 @@ namespace Connect4
 
             gfx = pnlGraphics.CreateGraphics();
             p = new Pen(Color.Black);
+
+            localTurn = true; // Debug
         }
 
         public void drawGameState()
@@ -77,6 +81,11 @@ namespace Connect4
         private void btnAbandon_Click(object sender, EventArgs e)
         {
             drawBoardOutlines();
+        }
+
+        private void pnlGraphics_MouseMove(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }
