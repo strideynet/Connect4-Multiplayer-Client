@@ -1,5 +1,6 @@
 ﻿const WebSocket = require('ws')
 const shortid = require('shortid')
+const jwt = require('jsonwebtoken')
 
 const wss = new WebSocket.Server({ port: 80 })
 
@@ -29,7 +30,14 @@ message datatype:
 */
 const messageHandles = {
   'Registration': function (ws, req) {
+    let ply = new Player(ws, req.data.username)
 
+    let jwtContent = {
+      username: ply.username,
+      id: ply.id
+    }
+
+    let token = jwt.sign(jwtContent, 'temporarySecret')
   },
   'MatchRequest': function (ws, req) {
 
@@ -41,14 +49,18 @@ const messageHandles = {
 
 function messageHandler (ws, rawMessage) {
   console.log(rawMessage)
+  let req = {}
+
   try {
-    let req = JSON.parse(rawMessage)
-
-    if (messageHandles[req.type]) {
-
-    }
+    req = JSON.parse(rawMessage)
   } catch (e) {
-    console.error('Invalid message recieved. Cannot decode.')
+    return console.error('Invalid message recieved. Cannot decode.')
+  }
+
+  if (messageHandles[req.type]) {
+    messageHandles[req.type](ws, req)
+  } else {
+    console.error('Invalid message type. Cannot handle.')
   }
 }
 
