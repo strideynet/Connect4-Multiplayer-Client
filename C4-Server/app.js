@@ -1,60 +1,61 @@
-﻿'use strict';
-var debug = require('debug');
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
+﻿const WebSocket = require('ws')
+const shortid = require('shortid')
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+const wss = new WebSocket.Server({port: 80})
 
-var app = express();
+const allPlayers = {}
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
+wss.on('connection', function connection (ws) {
+  console.log("yeet")
+  ws.on('message', function incoming (message) {
+    console.log('wat')
+    messageHandler(ws, message)
+  })
+})
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(logger('dev'));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+/*
+message datatype:
+{
+  type: STRING // Message Type
+  agent: STRING // Identifies the client
+  data: OBJECT // Encoded data for that message
+}
+*/
 
-app.use('/', routes);
-app.use('/users', users);
-
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
-
-// error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function (err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
+function messageHandler (ws, message) {
+  console.log(message)
+  let decoded = JSON.parse(message)
 }
 
-// production error handler
-// no stacktraces leaked to user
-app.use(function (err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
-});
+class Match {
+  constructor (players) {
+    this.players = {1: players[0], 10: players[1]}
+    players[0].boardNumber = 0
+    players[1].boardNumber = 10
 
-app.set('port', process.env.PORT || 3000);
+    players[0].match = this
+    players[1].match = this
 
-var server = app.listen(app.get('port'), function () {
-    debug('Express server listening on port ' + server.address().port);
-});
+    this.currentPlayer = 1
+    this.board = []
+  }
+}
+
+class Player {
+  constructor (ws, username) {
+    this.id = shortid.generate()
+
+    allPlayers[this.id] = this
+
+    this.ws = ws
+    this.username = username
+    this.boardNumber = 0
+    this.match = null
+
+    this.clearBoard()
+  }
+
+  clearBoard () {
+    this.board = Array(7).fill(Array(6).fill(0)) // Creates zero-filled 7x6 array
+  }
+}

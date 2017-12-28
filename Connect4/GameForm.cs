@@ -26,7 +26,7 @@ namespace Connect4 {
             gfx = pnlGraphics.CreateGraphics();
             p = new Pen(Color.Black);
 
-            gameLogic = new GameLogic(new MultiplayerConnection("http://127.0.0.1:80/matchmaking"), 5);
+            gameLogic = new GameLogic(new MultiplayerConnection("ws://127.0.0.1:80"), 5);
 
             localTurn = true; // Debug
         }
