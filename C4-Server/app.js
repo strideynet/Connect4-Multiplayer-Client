@@ -5,11 +5,15 @@ const wss = new WebSocket.Server({port: 80})
 
 const allPlayers = {}
 
-wss.on('connection', function connection (ws) {
-  console.log("yeet")
-  ws.on('message', function incoming (message) {
-    console.log('wat')
+wss.on('connection', function (ws) {
+  ws.send(JSON.stringify({info: "Sperg"}))
+
+  ws.on('message', function (message) {
     messageHandler(ws, message)
+  })
+
+  ws.on('error', function (error) {
+    console.log(error)
   })
 })
 
@@ -24,7 +28,12 @@ message datatype:
 
 function messageHandler (ws, message) {
   console.log(message)
-  let decoded = JSON.parse(message)
+  try {
+    let decoded = JSON.parse(message)
+
+  } catch (e) {
+    console.error('Invalid message recieved. Cannot decode.')
+  }
 }
 
 class Match {
