@@ -19,7 +19,7 @@ namespace Connect4
             clientWebSocket.OnMessage += messageHandler;
             clientWebSocket.Connect();
 
-            clientWebSocket.Send(JsonConvert.SerializeObject(new MessageTypes.MessageShell(new MessageTypes.Registration("Cyka"))));
+            clientWebSocket.Send(JsonConvert.SerializeObject(new MessageTypes.Registration("CYKALBK")));
         }
 
         private void messageHandler(object sender, MessageEventArgs e)
