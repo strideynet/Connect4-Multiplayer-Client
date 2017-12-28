@@ -27,12 +27,26 @@ message datatype:
   data: OBJECT // Encoded data for that message
 }
 */
+const messageHandles = {
+  'Registration': function (ws, req) {
 
-function messageHandler (ws, message) {
-  console.log(message)
+  },
+  'MatchRequest': function (ws, req) {
+
+  },
+  'ChatMessage': function (ws, req) {
+
+  }
+}
+
+function messageHandler (ws, rawMessage) {
+  console.log(rawMessage)
   try {
-    let decoded = JSON.parse(message)
+    let req = JSON.parse(rawMessage)
 
+    if (messageHandles[req.type]) {
+
+    }
   } catch (e) {
     console.error('Invalid message recieved. Cannot decode.')
   }
