@@ -1,19 +1,21 @@
 ﻿const WebSocket = require('ws')
 const shortid = require('shortid')
 
-const wss = new WebSocket.Server({port: 80})
+const wss = new WebSocket.Server({ port: 80 })
 
 const allPlayers = {}
 
 wss.on('connection', function (ws) {
-  ws.send(JSON.stringify({info: "Sperg"}))
+  ws.send(JSON.stringify({ info: 'spag'}))
 
   ws.on('message', function (message) {
     messageHandler(ws, message)
   })
 
   ws.on('error', function (error) {
-    console.log(error)
+    if (error.code !== 'ECONNRESET') {
+      console.log(error)
+    }
   })
 })
 
@@ -38,7 +40,7 @@ function messageHandler (ws, message) {
 
 class Match {
   constructor (players) {
-    this.players = {1: players[0], 10: players[1]}
+    this.players = { 1: players[0], 10: players[1] }
     players[0].boardNumber = 0
     players[1].boardNumber = 10
 

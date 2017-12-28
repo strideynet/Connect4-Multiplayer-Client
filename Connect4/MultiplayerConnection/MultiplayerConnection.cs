@@ -24,7 +24,6 @@ namespace Connect4
 
         private void messageHandler(object sender, MessageEventArgs e)
         {
-            Console.WriteLine("BLYAD");
             dynamic message = JsonConvert.DeserializeObject(e.Data);
 
             Console.WriteLine(e.Data);

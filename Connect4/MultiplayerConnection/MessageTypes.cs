@@ -6,34 +6,52 @@ using System.Threading.Tasks;
 
 namespace Connect4.MessageTypes
 {
-    class _MessageShell {
+    abstract class MessageShell {
         public string type { get { return this.GetType().Name; } }
         public string agent = "NStride C4 v1";
 
-        public struct dataStructure {};
-
-        public dataStructure data;
+        public struct DataStructure { };
+        public DataStructure data;
     }
 
-    class _AuthenticatedMessageShell : _MessageShell
+    abstract class AuthenticatedMessageShell : MessageShell
     {
         public string jwt;
 
-        public _AuthenticatedMessageShell (string jwt) {
+        public AuthenticatedMessageShell (string jwt) {
             this.jwt = jwt;
         }
     }
 
-    class Registration : _MessageShell
+    class Registration : MessageShell
     {
-        public new struct dataStructure {
+        public new struct DataStructure {
             public string username;
-        }
-
-        public new dataStructure data;
+        };
+        public new DataStructure data;
 
         public Registration(string username) {
             this.data.username = username;
+        }
+    }
+
+    class MatchRequest : AuthenticatedMessageShell
+    {
+        public new struct DataStructure {};
+        public new DataStructure data;
+
+        public MatchRequest(string jwt) : base(jwt) { }
+    }
+
+    class ChatMessage : AuthenticatedMessageShell
+    {
+        public new struct DataStructure {
+            public string chat;
+        };
+        public new DataStructure data;
+
+        public ChatMessage(string jwt, string chat) : base(jwt) {
+            this.data.chat = chat;
         }
     }
 }

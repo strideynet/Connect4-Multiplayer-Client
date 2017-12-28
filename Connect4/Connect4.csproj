@@ -80,7 +80,7 @@
       <DependentUpon>MenuScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="MultiplayerConnection\MultiplayerConnection.cs" />
-    <Compile Include="MultiplayerConnection\Structs.cs" />
+    <Compile Include="MultiplayerConnection\MessageTypes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GameForm.resx">
