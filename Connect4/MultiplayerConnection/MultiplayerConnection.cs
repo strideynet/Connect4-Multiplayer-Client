@@ -8,18 +8,22 @@ using Newtonsoft.Json;
 
 namespace Connect4
 {
-    class MultiplayerConnection
+    public class MultiplayerConnection
     {
         private WebSocket clientWebSocket;
 
         private GameLogic gameLogic;
 
-        public MultiplayerConnection(string url) {
+        private string jwt;
+
+        public MultiplayerConnection(string url, string username) {
             clientWebSocket = new WebSocket(url);
             clientWebSocket.OnMessage += messageHandler;
             clientWebSocket.Connect();
 
-            clientWebSocket.Send(JsonConvert.SerializeObject(new MessageTypes.Registration("CYKALBK")));
+            clientWebSocket.Send(JsonConvert.SerializeObject(new MessageTypes.Registration(username)));
+
+            gameLogic = new GameLogic(this, 1);
         }
 
         private void messageHandler(object sender, MessageEventArgs e)
@@ -27,7 +31,27 @@ namespace Connect4
             dynamic message = JsonConvert.DeserializeObject(e.Data);
 
             Console.WriteLine(e.Data);
-            Console.WriteLine(message.info);
+            
+            switch (message.type)
+            {
+                case "RegistrationReturn":
+                    RegistrationReturnHandler(message);
+                    break;
+                default:
+                    Console.WriteLine("Unrecognised type");
+                    break;
+            }
+        }
+
+        private void RegistrationReturnHandler(dynamic message)
+        {
+
+        }
+
+        public void columnClick(int column )
+        {
+            var message = new MessageTypes.PlayPosition(this.jwt, column);
+            clientWebSocket.Send(JsonConvert.SerializeObject(message));
         }
     }
 }

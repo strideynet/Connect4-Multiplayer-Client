@@ -54,4 +54,18 @@ namespace Connect4.MessageTypes
             this.data.chat = chat;
         }
     }
+
+    class PlayPosition : AuthenticatedMessageShell
+    {
+        public new struct DataStructure
+        {
+            public int column;
+        };
+        public new DataStructure data;
+
+        public PlayPosition(string jwt, int column) : base(jwt)
+        {
+            this.data.column = column;
+        }
+    }
 }

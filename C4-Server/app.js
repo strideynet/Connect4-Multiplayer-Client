@@ -6,6 +6,8 @@ const wss = new WebSocket.Server({ port: 80 })
 
 const allPlayers = {}
 
+const SERVER_AGENT = "C4P Server"
+
 wss.on('connection', function (ws) {
   ws.send(JSON.stringify({ info: 'spag'}))
 
@@ -38,6 +40,14 @@ const messageHandles = {
     }
 
     let token = jwt.sign(jwtContent, 'temporarySecret')
+
+    let message = {
+      agent: SERVER_AGENT,
+      type: 'RegistrationReturn',
+      data: {jwt: token}
+    }
+
+    ws.send(JSON.stringify(message))
   },
   'MatchRequest': function (ws, req) {
 

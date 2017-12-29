@@ -17,18 +17,16 @@ namespace Connect4 {
         private GameLogic gameLogic;
 
         private Point screenPosition = new Point();
+        private Point gamePosition = new Point();
 
-        public bool localTurn;
-
-        public GameForm() {
+        public GameForm(GameLogic gameLogic) {
             InitializeComponent();
 
             gfx = pnlGraphics.CreateGraphics();
             p = new Pen(Color.Black);
 
-            gameLogic = new GameLogic(new MultiplayerConnection("ws://127.0.0.1:80"), 5);
-
-            localTurn = true; // Debug
+            this.gameLogic = gameLogic;
+            gameLogic.localTurn = true; // Debug
         }
 
         public void drawGameState() {
@@ -56,8 +54,7 @@ namespace Connect4 {
         /// Draw provisional placement of the next chip
         /// </summary>
         private void drawProvisionalPlacement() {
-            if (localTurn) {
-                int[,] gameBoard = gameLogic.getGameBoard();
+            if (gameLogic.localTurn) {
                 int gamePositionX = resolveMousePosition().X;
 
                 int yFree = gameLogic.getFreeInColumn(gamePositionX);
@@ -84,7 +81,16 @@ namespace Connect4 {
         /// Draw all the board pieces
         /// </summary>
         private void drawGamePieces() {
-            int[,] gameBoard = gameLogic.getGameBoard();
+            for (int x = 0; x < 7; x++)
+            {
+                for (int y = 0; y < 6; y++)
+                {
+                    if (gameLogic.gameBoard[x, y] == gameLogic.localPlayer)
+                    {
+                        drawCircle(new Rectangle(x * 125 + 5, y * 125 + 5, 115, 115), Color.Blue, true);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -92,8 +98,6 @@ namespace Connect4 {
         /// </summary>
         /// <returns>Position of game position</returns>
         private Point resolveMousePosition() {
-            Point gamePosition = new Point();
-
             gamePosition.X = screenPosition.X / 126;
             gamePosition.Y = screenPosition.Y / 126;
 
@@ -107,13 +111,21 @@ namespace Connect4 {
         }
 
         private void pnlGraphics_MouseDown(object sender, MouseEventArgs e) {
+            gameLogic.columnClick(resolveMousePosition().X);
         }
 
         private void pnlGraphics_MouseMove(object sender, MouseEventArgs e) {
             screenPosition.X = e.X;
             screenPosition.Y = e.Y;
 
-            drawGameState();
+            int oldX = gamePosition.X;
+
+            resolveMousePosition();
+
+            if (gamePosition.X != oldX)
+            {
+                drawGameState();
+            }
         }
     }
 }

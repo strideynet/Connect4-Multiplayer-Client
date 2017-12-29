@@ -15,8 +15,7 @@ namespace Connect4 {
         }
 
         private void btnMatchmake_Click(object sender, EventArgs e) {
-            GameForm gameForm = new GameForm();
-            gameForm.Show();
+            MultiplayerConnection multiplayerConnection = new MultiplayerConnection("ws://127.0.0.1:80", txtUsername.Text);
         }
     }
 }
