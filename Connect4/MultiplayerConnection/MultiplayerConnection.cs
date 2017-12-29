@@ -50,7 +50,8 @@ namespace Connect4
             clientWebSocket.Send(JsonConvert.SerializeObject(reply));
         }
 
-        /* The following is an example of thread traversal. The networking is occuring in a side thread and thus the MatchRequestHandler is in that thread to start with
+        /* 
+         * The following is an example of thread traversal. The networking is occuring in a side thread and thus the MatchRequestHandler is in that thread to start with
          * This will cause all sorts of trouble if you try to create a new form. So instead we ask the menuScreen to nicely run the function again in its thread
          * The MatchRequestReturnDelegate sets out the format of the parameters, so that it can be invoked in a statically typed system.
          *  Finally once the function is ran again on the main UI thread, the else statement will be selected.
