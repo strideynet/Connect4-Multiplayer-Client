@@ -42,12 +42,15 @@ namespace Connect4
 
         public int getFreeInColumn(int column)
         {
-            // Loop through the rows to find the next avail slot
-            for (int y = 5; y >= 0; y--)
+            if (column < 7)
             {
-                if (gameBoard[column, y] == 0)
+                // Loop through the rows to find the next avail slot
+                for (int y = 5; y >= 0; y--)
                 {
-                    return y;
+                    if (gameBoard[column, y] == 0)
+                    {
+                        return y;
+                    }
                 }
             }
 

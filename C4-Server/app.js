@@ -9,6 +9,8 @@ const allPlayers = {}
 const SERVER_AGENT = "C4P Server"
 const SERVER_SECRET = "temporarySecret"
 
+let waitingForMatch = null
+
 wss.on('connection', function (ws) {
   ws.send(JSON.stringify({ info: 'spag'}))
 
@@ -51,9 +53,17 @@ const messageHandles = {
     ws.send(JSON.stringify(message))
   },
   'MatchRequest': function (ws, req) {
+    if (waitingForMatch = null) {
 
+    } else { //If someone is waiting match with them
+      let match = new Match([req.user, waitingForMatch])
+      waitingForMatch = null
+    }
   },
   'ChatMessage': function (ws, req) {
+
+  },
+  'PlayPosition': function (ws, req) {
 
   }
 }
@@ -69,9 +79,22 @@ function messageHandler (ws, rawMessage) {
   }
 
   if (messageHandles[req.type]) {
-    if (req.type !== 'Registration') {
+    if (req.type !== 'Registration') { // All other message types require authentication
       if (req.jwt) {
-        jwt.verify(req.jwt, SERVER_SECRET)
+        let decoded = {}
+        try {
+          decoded = jwt.verify(req.jwt, SERVER_SECRET)
+        } catch (e) {
+          return console.error('Issue with JWT')
+        }
+
+        if (allPlayers[decoded.id]) {
+          req.user = allPlayers[decoded.id]
+        } else {
+          return console.error('User not found. Maybe session expired or server restarted.')
+        }
+      } else {
+        return console.error('Missing JWT')
       }
     }
     messageHandles[req.type](ws, req)
