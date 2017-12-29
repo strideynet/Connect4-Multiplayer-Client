@@ -26,26 +26,20 @@ namespace Connect4
             gameLogic = new GameLogic(this, 1);
         }
 
-        private void messageHandler(object sender, MessageEventArgs e)
-        {
+        private void messageHandler(object sender, MessageEventArgs e) {
             dynamic message = JsonConvert.DeserializeObject(e.Data);
 
             Console.WriteLine(e.Data);
+            Console.WriteLine((string) message.type);
             
-            switch (message.type)
-            {
-                case "RegistrationReturn":
-                    RegistrationReturnHandler(message);
-                    break;
-                default:
-                    Console.WriteLine("Unrecognised type");
-                    break;
+            if (message.type == "RegistrationReturn") {
+                RegistrationReturnHandler(message);
             }
         }
 
         private void RegistrationReturnHandler(dynamic message)
         {
-
+            jwt = message.data.jwt;
         }
 
         public void columnClick(int column )

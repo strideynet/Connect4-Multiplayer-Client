@@ -7,6 +7,7 @@ const wss = new WebSocket.Server({ port: 80 })
 const allPlayers = {}
 
 const SERVER_AGENT = "C4P Server"
+const SERVER_SECRET = "temporarySecret"
 
 wss.on('connection', function (ws) {
   ws.send(JSON.stringify({ info: 'spag'}))
@@ -39,7 +40,7 @@ const messageHandles = {
       id: ply.id
     }
 
-    let token = jwt.sign(jwtContent, 'temporarySecret')
+    let token = jwt.sign(jwtContent, SERVER_SECRET)
 
     let message = {
       agent: SERVER_AGENT,
@@ -68,6 +69,11 @@ function messageHandler (ws, rawMessage) {
   }
 
   if (messageHandles[req.type]) {
+    if (req.type !== 'Registration') {
+      if (req.jwt) {
+        jwt.verify(req.jwt, SERVER_SECRET)
+      }
+    }
     messageHandles[req.type](ws, req)
   } else {
     console.error('Invalid message type. Cannot handle.')
