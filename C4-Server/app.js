@@ -53,8 +53,8 @@ const messageHandles = {
     ws.send(JSON.stringify(message))
   },
   'MatchRequest': function (ws, req) {
-    if (waitingForMatch = null) {
-
+    if (waitingForMatch == null) {
+      waitingForMatch = req.user
     } else { //If someone is waiting match with them
       let match = new Match([req.user, waitingForMatch])
       waitingForMatch = null
@@ -114,6 +114,33 @@ class Match {
 
     this.currentPlayer = 1
     this.board = []
+
+    this.clearBoard()
+    this.generateMatchRequestReturn()
+  }
+
+  generateMatchRequestReturn () {
+    let $this = this
+    const arr = [1, 10]
+    arr.forEach(function (value) {
+      let opponent = 10
+      if (value === 10) { opponent = 1 }
+
+      let message = {
+        type: 'MatchRequestReturn',
+        agent: SERVER_AGENT,
+        data: {
+          opponent: $this.players[opponent].username,
+          localNum: value
+        }
+      }
+
+      $this.players[value].ws.send(JSON.stringify(message))
+    })
+  }
+
+  clearBoard () {
+    this.board = Array(7).fill(Array(6).fill(0)) // Creates zero-filled 7x6 array
   }
 }
 
@@ -127,11 +154,5 @@ class Player {
     this.username = username
     this.boardNumber = 0
     this.match = null
-
-    this.clearBoard()
-  }
-
-  clearBoard () {
-    this.board = Array(7).fill(Array(6).fill(0)) // Creates zero-filled 7x6 array
   }
 }

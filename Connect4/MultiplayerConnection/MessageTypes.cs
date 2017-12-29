@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Connect4.MessageTypes
 {
+    #region super class definition
     abstract class MessageShell {
         public string type { get { return this.GetType().Name; } }
         public string agent = "NStride C4 v1";
@@ -22,6 +23,7 @@ namespace Connect4.MessageTypes
             this.jwt = jwt;
         }
     }
+    #endregion
 
     class Registration : MessageShell
     {
