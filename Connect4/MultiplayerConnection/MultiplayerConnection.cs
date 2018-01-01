@@ -27,6 +27,11 @@ namespace Connect4
             clientWebSocket.Send(JsonConvert.SerializeObject(new MessageTypes.Registration(username)));
         }
 
+        /// <summary>
+        /// Handles all messages coming in and directs to message type handlers
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="e">MessageEventArgs</param>
         private void messageHandler(object sender, MessageEventArgs e) {
             dynamic message = JsonConvert.DeserializeObject(e.Data); // Dynamic as format is unknown.
 

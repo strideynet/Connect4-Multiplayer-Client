@@ -29,6 +29,9 @@ namespace Connect4 {
             gameLogic.localTurn = true; // Debug
         }
 
+        /// <summary>
+        /// Draws the game state from the logic to the UI
+        /// </summary>
         public void drawGameState() {
             pnlGraphics.Refresh();
 
@@ -113,6 +116,7 @@ namespace Connect4 {
         private void pnlGraphics_MouseDown(object sender, MouseEventArgs e) {
             gameLogic.columnClick(resolveMousePosition().X);
         }
+
 
         private void pnlGraphics_MouseMove(object sender, MouseEventArgs e) {
             screenPosition.X = e.X;

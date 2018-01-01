@@ -12,8 +12,6 @@ const SERVER_SECRET = "temporarySecret"
 let waitingForMatch = null
 
 wss.on('connection', function (ws) {
-  ws.send(JSON.stringify({ info: 'spag'}))
-
   ws.on('message', function (message) {
     messageHandler(ws, message)
   })
@@ -64,7 +62,9 @@ const messageHandles = {
 
   },
   'PlayPosition': function (ws, req) {
-
+    if (req.user.match) {
+      
+    }
   }
 }
 
