@@ -133,7 +133,8 @@ class Match {
         agent: SERVER_AGENT,
         data: {
           opponent: $this.players[opponent].username,
-          localNum: value
+          localNum: value,
+          currentPlayer: $this.currentPlayer
         }
       }
 
@@ -155,10 +156,18 @@ class Match {
     let freeRow = this.findFree(column)
     if (freeRow !== -1) {
       this.board[column][freeRow] = user.boardNumber
+      this.alternatePlayer()
       this.sendBoardUpdate()
     }
   }
 
+  alternatePlayer () {
+    if (this.currentPlayer === 1) {
+      this.currentPlayer = 10
+    } else {
+      this.currentPlayer = 1
+    }
+  }
   findFree (column) {
     for (let y = 5; y >= 0; y--) {
       if (this.board[column][y] === 0) {
@@ -174,7 +183,8 @@ class Match {
       type: 'MatchUpdate',
       agent: SERVER_AGENT,
       data: {
-        board: this.board
+        board: this.board,
+        currentPlayer: this.currentPlayer
       }
     })
 

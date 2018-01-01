@@ -31,13 +31,17 @@ namespace Connect4
         /// <param name="column">which X position to place in</param>
         public void columnClick(int column)
         {
-            int row = getFreeInColumn(column);
-            if (row != -1)
+            if (this.localTurn)
             {
-                gameBoard[column, row] = localPlayer; // Predicting success.
-                multiplayerConnection.columnClick(column);
-                gameForm.drawGameState();
+                int row = getFreeInColumn(column);
+                if (row != -1)
+                {
+                    gameBoard[column, row] = localPlayer; // Predicting success.
+                    multiplayerConnection.columnClick(column);
+                    gameForm.drawGameState();
+                }
             }
+
         }
 
         public int getFreeInColumn(int column)

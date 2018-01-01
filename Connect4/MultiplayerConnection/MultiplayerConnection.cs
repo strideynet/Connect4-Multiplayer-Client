@@ -71,6 +71,7 @@ namespace Connect4
                 menuScreen.BeginInvoke(new GenericDelegate(MatchRequestReturnHandler), new object[] { message }); //Force the control to invoke this function on its thread
             } else { //Once we are in the UI thread do the following:
                 gameLogic = new GameLogic(this, (int)message.data.localNum);
+                gameLogic.localTurn = (gameLogic.localPlayer == (int)message.data.currentPlayer);
             }
         }
 
@@ -87,6 +88,7 @@ namespace Connect4
                         gameLogic.gameBoard[x, y] = message.data.board[x][y];
                     }
                 }
+                gameLogic.localTurn = (gameLogic.localPlayer == (int)message.data.currentPlayer);
                 gameLogic.gameForm.drawGameState();
             }
         }
