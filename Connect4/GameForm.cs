@@ -91,7 +91,8 @@ namespace Connect4 {
                     if (gameLogic.gameBoard[x, y] == gameLogic.localPlayer)
                     {
                         drawCircle(new Rectangle(x * 125 + 5, y * 125 + 5, 115, 115), Color.Blue, true);
-                    } else {
+                    } else if (gameLogic.gameBoard[x, y] != 0)
+                    {
                         drawCircle(new Rectangle(x * 125 + 5, y * 125 + 5, 115, 115), Color.Red, true);
                     }
                 }

@@ -62,25 +62,32 @@ namespace Connect4
          * The MatchRequestReturnDelegate sets out the format of the parameters, so that it can be invoked in a statically typed system.
          *  Finally once the function is ran again on the main UI thread, the else statement will be selected.
          */
-        private delegate void MatchRequestReturnDelegate(dynamic message); //Delegate for cross thread work
+        private delegate void GenericDelegate(dynamic message); //Delegate for cross thread work
 
         private void MatchRequestReturnHandler(dynamic message)
         {
             if (menuScreen.InvokeRequired) //Checks if we are on different thread from the menuScreen UI:
             {
-                menuScreen.BeginInvoke(new MatchRequestReturnDelegate(MatchRequestReturnHandler), new object[] { message }); //Force the control to invoke this function on its thread
+                menuScreen.BeginInvoke(new GenericDelegate(MatchRequestReturnHandler), new object[] { message }); //Force the control to invoke this function on its thread
             } else { //Once we are in the UI thread do the following:
                 gameLogic = new GameLogic(this, (int)message.data.localNum);
             }
         }
 
         private void MatchUpdateHandler(dynamic message) {
-            for (int x = 0; x < 7; x++)
+            if (menuScreen.InvokeRequired) //Checks if we are on different thread from the menuScreen UI:
             {
-                for (int y = 0; y < 6; y++)
+                menuScreen.BeginInvoke(new GenericDelegate(MatchUpdateHandler), new object[] { message }); //Force the control to invoke this function on its thread
+            } else
+            {
+                for (int x = 0; x < 7; x++)
                 {
-                    gameLogic.gameBoard[x, y] = message.data.board[x][y];
+                    for (int y = 0; y < 6; y++)
+                    {
+                        gameLogic.gameBoard[x, y] = message.data.board[x][y];
+                    }
                 }
+                gameLogic.gameForm.drawGameState();
             }
         }
 

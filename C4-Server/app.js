@@ -153,9 +153,7 @@ class Match {
 
   attemptPlay (user, column) {
     let freeRow = this.findFree(column)
-    console.log('column: ' + column + ' freeRow: ' + freeRow)
     if (freeRow !== -1) {
-      console.log(freeRow)
       this.board[column][freeRow] = user.boardNumber
       this.sendBoardUpdate()
     }
