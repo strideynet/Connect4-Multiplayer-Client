@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connect4", "Connect4\Connec
 EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "C4-Server", "C4-Server\C4-Server.njsproj", "{89EE55B4-DE02-45AB-8887-AFC79B852FEB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecondLoad", "SecondLoad\SecondLoad\SecondLoad.csproj", "{D21D4682-0267-4511-9EC5-5F9C7BA3B0FD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{53D8C896-D773-4DDF-B8F1-FD22C271E26F} = {53D8C896-D773-4DDF-B8F1-FD22C271E26F}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +26,9 @@ Global
 		{89EE55B4-DE02-45AB-8887-AFC79B852FEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89EE55B4-DE02-45AB-8887-AFC79B852FEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89EE55B4-DE02-45AB-8887-AFC79B852FEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D21D4682-0267-4511-9EC5-5F9C7BA3B0FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D21D4682-0267-4511-9EC5-5F9C7BA3B0FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D21D4682-0267-4511-9EC5-5F9C7BA3B0FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -14,7 +14,7 @@ namespace Connect4
         public bool localTurn;
 
         private MultiplayerConnection multiplayerConnection;
-        private GameForm gameForm;
+        public GameForm gameForm;
 
         public GameLogic(MultiplayerConnection multiplayerConnection, int localPlayer)
         {

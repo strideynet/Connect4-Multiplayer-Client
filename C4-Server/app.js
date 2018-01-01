@@ -62,8 +62,10 @@ const messageHandles = {
 
   },
   'PlayPosition': function (ws, req) {
-    if (req.user.match) {
-      
+    if (req.user.match && (req.data.column !== null) && (req.data.column < 7)) {
+      req.user.playPosition(req.data.column)
+    } else {
+      return console.error('Invalid message recieved. Data fields incorrect.')
     }
   }
 }
@@ -106,7 +108,7 @@ function messageHandler (ws, rawMessage) {
 class Match {
   constructor (players) {
     this.players = { 1: players[0], 10: players[1] }
-    players[0].boardNumber = 0
+    players[0].boardNumber = 1
     players[1].boardNumber = 10
 
     players[0].match = this
@@ -140,7 +142,46 @@ class Match {
   }
 
   clearBoard () {
-    this.board = Array(7).fill(Array(6).fill(0)) // Creates zero-filled 7x6 array
+    this.board = [ [ 0, 0, 0, 0, 0, 0 ],
+                   [ 0, 0, 0, 0, 0, 0 ],
+                   [ 0, 0, 0, 0, 0, 0 ],
+                   [ 0, 0, 0, 0, 0, 0 ],
+                   [ 0, 0, 0, 0, 0, 0 ],
+                   [ 0, 0, 0, 0, 0, 0 ],
+                   [ 0, 0, 0, 0, 0, 0 ] ]
+  }
+
+  attemptPlay (user, column) {
+    let freeRow = this.findFree(column)
+    console.log('column: ' + column + ' freeRow: ' + freeRow)
+    if (freeRow !== -1) {
+      console.log(freeRow)
+      this.board[column][freeRow] = user.boardNumber
+      this.sendBoardUpdate()
+    }
+  }
+
+  findFree (column) {
+    for (let y = 5; y >= 0; y--) {
+      if (this.board[column][y] === 0) {
+        return y
+      }
+    }
+
+    return -1
+  }
+
+  sendBoardUpdate () {
+    let message = JSON.stringify({
+      type: 'MatchUpdate',
+      agent: SERVER_AGENT,
+      data: {
+        board: this.board
+      }
+    })
+
+    this.players[1].ws.send(message)
+    this.players[10].ws.send(message)
   }
 }
 
@@ -154,5 +195,9 @@ class Player {
     this.username = username
     this.boardNumber = 0
     this.match = null
+  }
+
+  playPosition (column) {
+    this.match.attemptPlay(this, column)
   }
 }

@@ -39,9 +39,10 @@ namespace Connect4
             
             if (message.type == "RegistrationReturn") {
                 RegistrationReturnHandler(message);
-            } else if (message.type == "MatchRequestReturn")
-            {
+            } else if (message.type == "MatchRequestReturn") {
                 MatchRequestReturnHandler(message);
+            } else if (message.type == "MatchUpdate") {
+                MatchUpdateHandler(message);
             }
         }
 
@@ -70,6 +71,16 @@ namespace Connect4
                 menuScreen.BeginInvoke(new MatchRequestReturnDelegate(MatchRequestReturnHandler), new object[] { message }); //Force the control to invoke this function on its thread
             } else { //Once we are in the UI thread do the following:
                 gameLogic = new GameLogic(this, (int)message.data.localNum);
+            }
+        }
+
+        private void MatchUpdateHandler(dynamic message) {
+            for (int x = 0; x < 7; x++)
+            {
+                for (int y = 0; y < 6; y++)
+                {
+                    gameLogic.gameBoard[x, y] = message.data.board[x][y];
+                }
             }
         }
 
