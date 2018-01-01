@@ -6,8 +6,8 @@ const wss = new WebSocket.Server({ port: 80 })
 
 const allPlayers = {}
 
-const SERVER_AGENT = "C4P Server"
-const SERVER_SECRET = "temporarySecret"
+const SERVER_AGENT = 'C4P Server'
+const SERVER_SECRET = 'temporarySecret'
 
 let waitingForMatch = null
 
@@ -157,7 +157,12 @@ class Match {
     if (freeRow !== -1) {
       this.board[column][freeRow] = user.boardNumber
       this.alternatePlayer()
-      this.sendBoardUpdate()
+
+      let win = this.checkWin()
+      if (win === false) {
+        this.checkDrop()
+        this.sendBoardUpdate()
+      }
     }
   }
 
@@ -168,6 +173,7 @@ class Match {
       this.currentPlayer = 1
     }
   }
+
   findFree (column) {
     for (let y = 5; y >= 0; y--) {
       if (this.board[column][y] === 0) {
@@ -190,6 +196,49 @@ class Match {
 
     this.players[1].ws.send(message)
     this.players[10].ws.send(message)
+  }
+
+  checkWin () {
+    var Victory = false
+    var Total = 0
+
+    for (var BigXLooper = 0; BigXLooper < 4; BigXLooper++) {
+      for (var BigYLooper = 0; BigYLooper < 3; BigYLooper++) {
+        for (var SmallXLooper = 0; SmallXLooper < 4; SmallXLooper++) { // Verticals
+          Total = 0
+
+          for (var SmallYLooper = 0; SmallYLooper < 4; SmallYLooper++) {
+            Total += this.board[BigXLooper + SmallXLooper][BigYLooper + SmallYLooper]
+          }
+
+          if (Total === 40) { Victory = 10 } else { if (Total === 4) { Victory = 1 } }
+        }
+
+        for (SmallYLooper = 0; SmallYLooper < 4; SmallYLooper++) { // Horizontals
+          Total = 0
+
+          for (SmallXLooper = 0; SmallXLooper < 4; SmallXLooper++) {
+            Total += this.board[BigXLooper + SmallXLooper][BigYLooper + SmallYLooper]
+          }
+
+          if (Total === 40) { Victory = 10 } else { if (Total === 4) { Victory = 1 } }
+        }
+
+        var DiagonalTLBR = this.board[BigXLooper][BigYLooper] + this.board[BigXLooper + 1][BigYLooper + 1] +// Diagonals
+        this.board[BigXLooper + 2][BigYLooper + 2] + this.board[BigXLooper + 3][BigYLooper + 3]
+        if (DiagonalTLBR === 40) { Victory = 10 } else { if (DiagonalTLBR === 4) { Victory = 1 } }
+
+        var DiagonalBLTR = this.board[BigXLooper + 3][BigYLooper] + this.board[BigXLooper + 2][BigYLooper + 1] +
+        this.board[BigXLooper + 3][BigYLooper + 2] + this.board[BigXLooper][BigYLooper + 3]
+        if (DiagonalBLTR === 40) { Victory = 10 } else { if (DiagonalBLTR === 4) { Victory = 1 } }
+      }
+    }
+
+    return Victory
+  }
+
+  checkDrop () {
+
   }
 }
 
