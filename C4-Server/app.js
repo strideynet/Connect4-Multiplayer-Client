@@ -162,6 +162,8 @@ class Match {
       if (win === false) {
         this.checkDrop()
         this.sendBoardUpdate()
+      } else {
+        this.endMatch(this.players[win], 1)
       }
     }
   }
@@ -238,6 +240,11 @@ class Match {
   }
 
   checkDrop () {
+
+  }
+
+  // Type: 1 - Standard Win 2 - Disconnect by loser
+  endMatch (winner, type) {
 
   }
 }
