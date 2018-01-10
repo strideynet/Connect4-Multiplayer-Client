@@ -216,10 +216,10 @@ class Match {
           if (Total === 40) { Victory = 10 } else { if (Total === 4) { Victory = 1 } }
         }
 
-        for (SmallYLooper = 0; SmallYLooper < 4; SmallYLooper++) { // Horizontals
+        for (var SmallYLooper = 0; SmallYLooper < 4; SmallYLooper++) { // Horizontals
           Total = 0
 
-          for (SmallXLooper = 0; SmallXLooper < 4; SmallXLooper++) {
+          for (var SmallXLooper = 0; SmallXLooper < 4; SmallXLooper++) {
             Total += this.board[BigXLooper + SmallXLooper][BigYLooper + SmallYLooper]
           }
 
@@ -245,7 +245,17 @@ class Match {
 
   // Type: 1 - Standard Win 2 - Disconnect by loser
   endMatch (winner, type) {
+    let message = {
+      agent: SERVER_AGENT,
+      type: "MatchEnd",
+      data: {
+        winner: winner.boardNumber,
+        type: type
+      }
+    }
 
+    this.players[1].ws.send(JSON.stringify(message))
+    this.players[10].ws.send(JSON.stringify(message))
   }
 }
 
