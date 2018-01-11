@@ -6,7 +6,7 @@
                                 "Coming soon to an Alexa near you", "Dim p As New System.Drawing.PhewwwwwwDrawingIsALotOfEffort()", "Perhaps read Tolkein. I'm not sure why.", "Now with AI*    {* Automated Idiocy }",
                                 "Decidedly the best way to waste your tem", """HOOOIIIIIIIIIIIIIII"" - Tem that was wasted", "'Undertale is a good game' - Yahtzee", "Everybody do the flop!", "Na Na Na (Na Na Na Na Na Na Na Na Na)",
                                 "I would fly you to the moon and back if you'll be, yeah you'll be my JET ENGINES!", "On a scale of one to ten, how much should ℵ actually do some work", "ℵ's writing a book. We think. Well, it's really just a collection of comments but that counts?",
-                                "GLUTEN FREE, VEGETARIAN FRIENDLY, PRO-CHOICE, ANTI-FACIST, VEGAN EXCLUSIVE HAPPINESS", "Cuminati Illuonfirmed", "You would not believe your knees / if ten million bumble bees...", "The bee movie but every time the word bee is said we all play Connect 4",
+                                "GLUTEN FREE, VEGETARIAN FRIENDLY, PRO-CHOICE, ANTI-FACIST, VEGAN EXCLUDED HAPPINESS", "Cuminati Illuonfirmed", "You would not believe your knees / if ten million bumble bees...", "The bee movie but every time the word bee is said we all play Connect 4",
                                 "How much would could a woodchuck chuck if a woodchuck could chuck NORRIS‽", "Windows Vista was the best. Don't believe me? ok.", "Savour this text, there's a lot of it", "C4? That sounds dangerous",
                                 "Not all of this was N! ℵ designed and coded this interface. And wrote some mini non-quotes", "Good luck", "ℵ likes doughnuts. Google Home Doughnuts!!!", "I hope you like B♭",
                                 "ℵ, translating from VB to JS since 22:47 27/12/17", "Surprisingly entertaining", "We stole a server and ran away. Haven't looked back since.", "Excerpt from 'the thoughts of a boy on the topic of life': ""It couldn't be too bad, could it?""",
@@ -35,7 +35,7 @@
     End Sub
 
     Private Sub BtnLeaderboards_Click(sender As Object, e As EventArgs) Handles BtnLeaderboards.Click, LeaderboardsToolStripMenuItem.Click
-        MsgBox("Sorry, but this feature is unavailable due to a distinct lack of online play to gather data from", , "LAZINESS.exe")
+        MsgBox("Sorry, but this feature is unavailable due to a distinct lack of online play to gather data from", , "LAZINESS.exe has given up")
     End Sub
 
     Private Sub ExitToMenuToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToMenuToolStripMenuItem.Click
@@ -116,7 +116,8 @@
 
             Dim UsrName As String = InputBox("What's your username?", "C-4: Online Play", "Anonymous Moose")
             If UsrName = "" Then UsrName = "Anonymous Guadaloupe"
-            ExternalVars.Connection = New MPlayerConnection("ws://127.0.0.1:80/", UsrName) ' "ws://86.138.91.20:80/" (srvr), "ws://127.0.0.1:80/" (local)
+            ExternalVars.LocalName = UsrName
+            ExternalVars.Connection = New MPlayerConnection("ws://91.134.107.74:80/", UsrName, Me) ' "ws://86.138.91.20:80/" (srvr), "ws://127.0.0.1:80/" (local)
 
 
         Catch ERR As Exception
@@ -127,7 +128,8 @@
 
     Public Sub StartGame(MSG As Object)
         MsgBox(MSG.ToString())
-        ExternalVars.LocalNumber = MSG("data")("localNum")
+        ExternalVars.LocalNumber = CInt(MSG("data")("localNum"))
+        ExternalVars.OpponentName = CStr(MSG("data")("opponent"))
         FrmMPlayerGame.Show()
         Me.Close()
     End Sub

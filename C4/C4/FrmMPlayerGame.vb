@@ -1,7 +1,7 @@
 ﻿Public Class FrmMPlayerGame
-#Region "Paint Controls"
-    Dim Game As OnlineGame
+    Dim Game As New OnlineGame(10)
     Dim DoRedraw As Boolean = True
+#Region "Paint Controls"
 
 
     Private Sub Refresher(Sender As Object, ByVal E As EventArgs) Handles PnlBoard.Paint
@@ -55,7 +55,7 @@
                         e.Graphics.FillEllipse(Game.P1Brush, XLocation, YLocation, MiniX, MiniY)
                         'e.Graphics.DrawEllipse(EP, XLocation, YLocation, MiniX, MiniY)
 
-                    ElseIf Game.Board(Looper1, Looper2) = 9 Then
+                    ElseIf Game.Board(Looper1, Looper2) = 10 Then
                         e.Graphics.FillEllipse(Game.P2Brush, XLocation, YLocation, MiniX, MiniY)
                         'e.Graphics.DrawEllipse(EP, XLocation, YLocation, MiniX, MiniY)
 
@@ -210,23 +210,52 @@
 
         End Select
 
+        Debug.WriteLine("LocalNumber: " & CStr(ExternalVars.LocalNumber))
         Game = New OnlineGame(ExternalVars.LocalNumber)
+
+        LblP1Name.Text = "Player 1: " & Game.P1Name
+        LblP2Name.Text = "Player 2: " & Game.P2Name
 
         UpdateMainGameTheme(My.Settings.CurrentTheme)
         DoRedraw = True
         PnlBoard.Refresh()
+
+        ExternalVars.Connection.UpdateReferenceForm(Me)
+
+        If Game.MyTurn = True Then
+            LblCurrentTurn.Text = "It's your turn"
+        Else
+            LblCurrentTurn.Text = "It's " & ExternalVars.OpponentName & "'s turn"
+        End If
     End Sub
 
     Public Sub ReceiveTurn(MSG As Object)
-
+        'Debug.WriteLine(CStr(MSG))
         For X = 0 To 6 Step 1
             For Y = 0 To 5 Step 1
-                Game.Board(X, Y) = MSG("data")("board")(X, Y)
+                Game.Board(X, Y) = CInt(MSG("data")("board")(X)(Y))
             Next
         Next
         Game.MyTurn = (Game.LocalNum = CInt(MSG("data")("currentPlayer")))
+
+        If Game.MyTurn = True Then
+            LblCurrentTurn.Text = "It's your turn"
+        Else
+            LblCurrentTurn.Text = "It's " & ExternalVars.OpponentName & "'s turn"
+        End If
+
+
         DoRedraw = True
         PnlBoard.Refresh()
+    End Sub
+
+    Private Sub TxtChatSender_TextChanged(sender As Object, e As EventArgs) Handles TxtChatSender.TextChanged
+        BtnSendChat.Enabled = (TxtChatSender.Text = "")
+
+    End Sub
+
+    Private Sub GetHelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GetHelpToolStripMenuItem.Click
+        FrmHelp.Show()
     End Sub
 
 End Class

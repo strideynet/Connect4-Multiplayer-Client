@@ -17,14 +17,21 @@
 
     Public Sub New(ByVal LocalNumber As Integer)
         ReDim Board(6, 5)
-        AddHandler Application.ApplicationExit, AddressOf OnApplicationExit
         If LocalNumber = 1 Then
             MeFirst = True
             LocalNum = 1
+            P1Name = ExternalVars.LocalName
+            P2Name = ExternalVars.OpponentName
         Else
             MeFirst = False
             LocalNum = 10
+            P1Name = ExternalVars.OpponentName
+            P2Name = ExternalVars.LocalName
         End If
+
+        MyTurn = MeFirst
+
+
 
         P1Colour = My.Settings.P1Colour
         P1Brush = New SolidBrush(P1Colour)
@@ -114,14 +121,6 @@
 
 #End Region
 
-    Private Sub OnApplicationExit()
 
-        ' inform the server about stuff then exit
-
-        ExternalVars.Connection.CloseConnection()
-
-
-
-    End Sub
 
 End Class

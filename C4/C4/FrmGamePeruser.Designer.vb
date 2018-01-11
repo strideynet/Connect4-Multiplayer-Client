@@ -46,7 +46,7 @@ Partial Class FrmGamePeruser
         Me.LblStatus.BackColor = System.Drawing.SystemColors.Control
         Me.LblStatus.Location = New System.Drawing.Point(12, 53)
         Me.LblStatus.Name = "LblStatus"
-        Me.LblStatus.Size = New System.Drawing.Size(360, 67)
+        Me.LblStatus.Size = New System.Drawing.Size(360, 39)
         Me.LblStatus.TabIndex = 0
         Me.LblStatus.Text = "Waiting to connect..."
         Me.LblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -54,9 +54,9 @@ Partial Class FrmGamePeruser
         'LblMiniTips
         '
         Me.LblMiniTips.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.LblMiniTips.Location = New System.Drawing.Point(12, 149)
+        Me.LblMiniTips.Location = New System.Drawing.Point(12, 121)
         Me.LblMiniTips.Name = "LblMiniTips"
-        Me.LblMiniTips.Size = New System.Drawing.Size(360, 103)
+        Me.LblMiniTips.Size = New System.Drawing.Size(360, 62)
         Me.LblMiniTips.TabIndex = 1
         Me.LblMiniTips.Text = "If you click correctly, you might win..."
         Me.LblMiniTips.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -122,7 +122,7 @@ Partial Class FrmGamePeruser
         '
         'BtnLeaderboards
         '
-        Me.BtnLeaderboards.Location = New System.Drawing.Point(12, 123)
+        Me.BtnLeaderboards.Location = New System.Drawing.Point(12, 95)
         Me.BtnLeaderboards.Name = "BtnLeaderboards"
         Me.BtnLeaderboards.Size = New System.Drawing.Size(360, 23)
         Me.BtnLeaderboards.TabIndex = 4
@@ -138,7 +138,7 @@ Partial Class FrmGamePeruser
         Me.LblSpinnerLeft.BackColor = System.Drawing.Color.PaleGreen
         Me.LblSpinnerLeft.Location = New System.Drawing.Point(12, 53)
         Me.LblSpinnerLeft.Name = "LblSpinnerLeft"
-        Me.LblSpinnerLeft.Size = New System.Drawing.Size(53, 67)
+        Me.LblSpinnerLeft.Size = New System.Drawing.Size(53, 39)
         Me.LblSpinnerLeft.TabIndex = 5
         Me.LblSpinnerLeft.Text = "-"
         Me.LblSpinnerLeft.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -148,7 +148,7 @@ Partial Class FrmGamePeruser
         Me.LblSpinnerRight.BackColor = System.Drawing.Color.PaleGreen
         Me.LblSpinnerRight.Location = New System.Drawing.Point(319, 53)
         Me.LblSpinnerRight.Name = "LblSpinnerRight"
-        Me.LblSpinnerRight.Size = New System.Drawing.Size(53, 67)
+        Me.LblSpinnerRight.Size = New System.Drawing.Size(53, 39)
         Me.LblSpinnerRight.TabIndex = 6
         Me.LblSpinnerRight.Text = "-"
         Me.LblSpinnerRight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -161,7 +161,7 @@ Partial Class FrmGamePeruser
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(384, 261)
+        Me.ClientSize = New System.Drawing.Size(384, 192)
         Me.Controls.Add(Me.LblSpinnerRight)
         Me.Controls.Add(Me.LblSpinnerLeft)
         Me.Controls.Add(Me.BtnLeaderboards)
@@ -171,8 +171,8 @@ Partial Class FrmGamePeruser
         Me.Controls.Add(Me.Menu)
         Me.MainMenuStrip = Me.Menu
         Me.MaximizeBox = False
-        Me.MaximumSize = New System.Drawing.Size(400, 300)
-        Me.MinimumSize = New System.Drawing.Size(400, 300)
+        Me.MaximumSize = New System.Drawing.Size(400, 230)
+        Me.MinimumSize = New System.Drawing.Size(400, 230)
         Me.Name = "FrmGamePeruser"
         Me.Text = "GamePeruser"
         Me.Menu.ResumeLayout(False)

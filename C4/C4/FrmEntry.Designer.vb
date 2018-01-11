@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FrmEntry
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,12 +20,11 @@ Partial Class FrmEntry
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.BtnSolo = New System.Windows.Forms.Button()
         Me.BtnOnlinePlay = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.DebugMeBtn = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'BtnSolo
@@ -55,21 +54,11 @@ Partial Class FrmEntry
         Me.Label1.Text = "ℵ presents... Connect 4"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'DebugMeBtn
-        '
-        Me.DebugMeBtn.Location = New System.Drawing.Point(78, 136)
-        Me.DebugMeBtn.Name = "DebugMeBtn"
-        Me.DebugMeBtn.Size = New System.Drawing.Size(75, 23)
-        Me.DebugMeBtn.TabIndex = 3
-        Me.DebugMeBtn.Text = "MPLAYERFORM"
-        Me.DebugMeBtn.UseVisualStyleBackColor = True
-        '
         'FrmEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(236, 165)
-        Me.Controls.Add(Me.DebugMeBtn)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.BtnOnlinePlay)
         Me.Controls.Add(Me.BtnSolo)
@@ -85,5 +74,4 @@ Partial Class FrmEntry
     Friend WithEvents BtnSolo As System.Windows.Forms.Button
     Friend WithEvents BtnOnlinePlay As System.Windows.Forms.Button
     Friend WithEvents Label1 As Label
-    Friend WithEvents DebugMeBtn As Button
 End Class

@@ -366,7 +366,7 @@
             LblP1Name.Text = Game.P1Name
             If LblP2Name.Text = "Player 2" Then
                 Game.P2Name = InputBox("Player 2's name?", "C-4: Offline Play", "Player 2")
-                If Game.P1Name = "" Then Game.P1Name = "Player 2"
+                If Game.P2Name = "" Then Game.P2Name = "Player 2"
             Else
                 Game.P2Name = LblP2Name.Text
             End If
