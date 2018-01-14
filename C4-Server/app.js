@@ -117,6 +117,8 @@ class Match {
     this.currentPlayer = 1
     this.board = []
 
+    this.live = true
+
     this.clearBoard()
     this.generateMatchRequestReturn()
   }
@@ -153,17 +155,19 @@ class Match {
   }
 
   attemptPlay (user, column) {
-    let freeRow = this.findFree(column)
-    if (freeRow !== -1) {
-      this.board[column][freeRow] = user.boardNumber
-      this.alternatePlayer()
+    if (this.live) {
+      let freeRow = this.findFree(column)
+      if (freeRow !== -1) {
+        this.board[column][freeRow] = user.boardNumber
+        this.alternatePlayer()
 
-      let win = this.checkWin()
-      if (win === false) {
-        this.checkDrop()
-        this.sendBoardUpdate()
-      } else {
-        this.endMatch(this.players[win], 1)
+        let win = this.checkWin()
+        if (win === false) {
+          this.checkDrop()
+          this.sendBoardUpdate()
+        } else {
+          this.endMatch(this.players[win], 1)
+        }
       }
     }
   }
@@ -256,6 +260,7 @@ class Match {
 
     this.players[1].ws.send(JSON.stringify(message))
     this.players[10].ws.send(JSON.stringify(message))
+    this.live = false
   }
 }
 
