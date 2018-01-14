@@ -59,7 +59,21 @@ const messageHandles = {
     }
   },
   'ChatMessage': function (ws, req) {
+    if (req.user.match && req.data.message) {
+      let message = {
+        agent: SERVER_AGENT,
+        type: 'ChatMessageReturn',
+        data: {
+          sender: req.user.username,
+          message: req.data.message
+        }
+      }
 
+      req.user.match.player[1].ws.send(message)
+      req.user.match.player[10].ws.send(message)
+    } else {
+      return console.error('Invalid message recieved. Data fields incorrect.')
+    }
   },
   'PlayPosition': function (ws, req) {
     if (req.user.match && (req.data.column !== null) && (req.data.column < 7)) {
