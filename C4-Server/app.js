@@ -69,8 +69,10 @@ const messageHandles = {
         }
       }
 
-      req.user.match.player[1].ws.send(message)
-      req.user.match.player[10].ws.send(message)
+      message = JSON.stringify(message)
+
+      req.user.match.players[1].ws.send(message)
+      req.user.match.players[10].ws.send(message)
     } else {
       return console.error('Invalid message recieved. Data fields incorrect.')
     }

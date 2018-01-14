@@ -134,5 +134,23 @@ namespace Connect4 {
                 drawGameState();
             }
         }
+
+        public void receiveMessage(string username, string message)
+        {
+            txtMessageLog.AppendText("\n" + username + ": " + message);
+        }
+
+        private void txtPendingMessage_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSubmitChat_Click(object sender, EventArgs e)
+        {
+            if (txtPendingMessage.Text != "") {
+                gameLogic.multiplayerConnection.sendMessage(txtPendingMessage.Text);
+                txtPendingMessage.Text = "";
+            }
+        }
     }
 }

@@ -48,12 +48,12 @@ namespace Connect4.MessageTypes
     class ChatMessage : AuthenticatedMessageShell
     {
         public new struct DataStructure {
-            public string chat;
+            public string message;
         };
         public new DataStructure data;
 
         public ChatMessage(string jwt, string chat) : base(jwt) {
-            this.data.chat = chat;
+            this.data.message = chat;
         }
     }
 

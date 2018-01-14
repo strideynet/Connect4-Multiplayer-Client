@@ -43,6 +43,8 @@ namespace Connect4
                 MatchRequestReturnHandler(message);
             } else if (message.type == "MatchUpdate") {
                 MatchUpdateHandler(message);
+            } else if (message.type == "ChatMessageReturn") {
+                ChatMessageHandler(message);
             }
         }
 
@@ -93,6 +95,18 @@ namespace Connect4
             }
         }
 
+        private void ChatMessageHandler(dynamic message)
+        {
+            if (menuScreen.InvokeRequired) //Checks if we are on different thread from the menuScreen UI:
+            {
+                menuScreen.BeginInvoke(new GenericDelegate(ChatMessageHandler), new object[] { message }); //Force the control to invoke this function on its thread
+            }
+            else
+            {
+                gameLogic.gameForm.receiveMessage((string)message.data.sender, (string)message.data.message);
+            }
+        }
+
         #endregion
 
         #region Remote Commands
@@ -100,6 +114,12 @@ namespace Connect4
         public void columnClick(int column )
         {
             var message = new MessageTypes.PlayPosition(this.jwt, column);
+            clientWebSocket.Send(JsonConvert.SerializeObject(message));
+        }
+
+        public void sendMessage(string messageContent)
+        {
+            var message = new MessageTypes.ChatMessage(this.jwt, messageContent);
             clientWebSocket.Send(JsonConvert.SerializeObject(message));
         }
 
