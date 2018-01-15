@@ -45,6 +45,8 @@ namespace Connect4
                 MatchUpdateHandler(message);
             } else if (message.type == "ChatMessageReturn") {
                 ChatMessageHandler(message);
+            } else if (message.type == "MatchEnd") {
+                MatchEndHandler(message);
             }
         }
 
@@ -104,6 +106,18 @@ namespace Connect4
             else
             {
                 gameLogic.gameForm.receiveMessage((string)message.data.sender, (string)message.data.message);
+            }
+        }
+
+        private void MatchEndHandler(dynamic message)
+        {
+            if (menuScreen.InvokeRequired) //Checks if we are on different thread from the menuScreen UI:
+            {
+                menuScreen.BeginInvoke(new GenericDelegate(MatchEndHandler), new object[] { message }); //Force the control to invoke this function on its thread
+            }
+            else
+            {
+                Console.WriteLine("pleb");
             }
         }
 

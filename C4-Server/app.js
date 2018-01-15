@@ -182,6 +182,7 @@ class Match {
           this.checkDrop()
           this.sendBoardUpdate()
         } else {
+          this.sendBoardUpdate()
           this.endMatch(this.players[win], 1)
         }
       }
