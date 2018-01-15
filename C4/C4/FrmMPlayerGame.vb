@@ -209,7 +209,7 @@
 
         End Select
 
-        Debug.WriteLine("LocalNumber: " & CStr(ExternalVars.LocalNumber))
+        'Debug.WriteLine("LocalNumber: " & CStr(ExternalVars.LocalNumber))
         Game = New OnlineGame(ExternalVars.LocalNumber)
 
         LblP1Name.Text = "Player 1: " & Game.P1Name
@@ -223,10 +223,10 @@
 
         If Game.MyTurn = True Then
             LblCurrentTurn.Text = "It's your turn"
-            Debug.WriteLine("I start")
+            'Debug.WriteLine("I start")
         Else
             LblCurrentTurn.Text = "It's " & ExternalVars.OpponentName & "'s turn"
-            Debug.WriteLine("They start")
+            'Debug.WriteLine("They start")
         End If
     End Sub
 
@@ -238,7 +238,7 @@
             Next
         Next
         Game.MyTurn = (Game.LocalNum = CInt(MSG("data")("currentPlayer")))
-        Debug.WriteLine(Game.MyTurn)
+        'Debug.WriteLine(Game.MyTurn)
         If Game.MyTurn = True Then
             LblCurrentTurn.Text = "It's your turn"
         Else

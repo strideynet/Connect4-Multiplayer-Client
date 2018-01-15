@@ -23,25 +23,25 @@ Class MPlayerConnection
     Private Delegate Sub MessageHandlerDelegate(sender As Object, E As WebSocketSharp.MessageEventArgs)
     Private Sub MessageHandler(sender As Object, E As WebSocketSharp.MessageEventArgs) Handles MyClientWebSocket.OnMessage
         If ControlForm.InvokeRequired = True Then
-            Debug.WriteLine("MessageHandler got invoked!")
+            'Debug.WriteLine("MessageHandler got invoked!")
             ControlForm.BeginInvoke(New MessageHandlerDelegate(AddressOf MessageHandler), New Object() {sender, E})
         Else
             Dim MSG As Json.Linq.JObject = Json.Linq.JObject.Parse(E.Data)
-            Debug.WriteLine(MSG.ToString())
+            'Debug.WriteLine(MSG.ToString())
             If CStr(MSG("type")) = "RegistrationReturn" Then
-                Debug.WriteLine("RegistrationReturn Message!")
+                'Debug.WriteLine("RegistrationReturn Message!")
                 RegistrationReturnHandler(MSG)
             ElseIf CStr(MSG("type")) = "MatchRequestReturn" Then
-                Debug.WriteLine("MatchRequestReturn Message!")
+                'Debug.WriteLine("MatchRequestReturn Message!")
                 MatchRequestReturnHandler(MSG)
             ElseIf CStr(MSG("type")) = "MatchUpdate" Then
-                Debug.WriteLine("MatchUpdate Message!")
+                'Debug.WriteLine("MatchUpdate Message!")
                 MatchUpdateHandler(MSG)
             ElseIf CStr(MSG("type")) = "ChatMessageReturn" Then
-                Debug.WriteLine("ChatReceived Message!")
+                'Debug.WriteLine("ChatReceived Message!")
                 ChatReceivedHandler(MSG)
             ElseIf CStr(MSG("type")) = "MatchEnd" Then
-                Debug.WriteLine("MatchEnd Message!")
+                'Debug.WriteLine("MatchEnd Message!")
                 EndMatchHandler(MSG)
             End If
 
@@ -83,10 +83,10 @@ Class MPlayerConnection
     Private Sub MatchUpdateHandler(MSG As Object)
 
         If ControlForm.InvokeRequired = True Then
-            Debug.WriteLine("Match update handler got invoked!")
+            'Debug.WriteLine("Match update handler got invoked!")
             ControlForm.BeginInvoke(New GenericDelegate(AddressOf MatchUpdateHandler), New Object() {MSG})
         Else
-            Debug.WriteLine("Invoke complete")
+            'Debug.WriteLine("Invoke complete")
             FrmMPlayerGame.ReceiveTurn(MSG)
         End If
 
@@ -94,17 +94,17 @@ Class MPlayerConnection
 
     Private Sub ChatReceivedHandler(MSG As Object)
         If ControlForm.InvokeRequired = True Then
-            Debug.WriteLine("Chat receiver handler got invoked!")
+            'Debug.WriteLine("Chat receiver handler got invoked!")
             ControlForm.BeginInvoke(New GenericDelegate(AddressOf ChatReceivedHandler), New Object() {MSG})
         Else
-            Debug.WriteLine("Chat received")
+            'Debug.WriteLine("Chat received")
             FrmMPlayerGame.ReceiveChat(MSG)
         End If
     End Sub
 
     Private Sub EndMatchHandler(MSG As Object)
         If ControlForm.InvokeRequired = True Then
-            Debug.WriteLine("Match end handler got invoked")
+            'Debug.WriteLine("Match end handler got invoked")
             ControlForm.BeginInvoke(New GenericDelegate(AddressOf EndMatchHandler), New Object() {MSG})
         Else
             If CStr(MSG("data")("type")) = "1" Then
@@ -151,7 +151,7 @@ Class MPlayerConnection
     End Sub
 
     Private Sub OnConnectionClose() Handles MyClientWebSocket.OnClose
-        Debug.WriteLine("Connection Closed")
+        'Debug.WriteLine("Connection Closed")
     End Sub
 
     Public Sub UpdateReferenceForm(NewForm As Object)

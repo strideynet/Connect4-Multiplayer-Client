@@ -23,6 +23,7 @@ Partial Class FrmGamePeruser
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmGamePeruser))
         Me.LblStatus = New System.Windows.Forms.Label()
         Me.LblMiniTips = New System.Windows.Forms.Label()
         Me.BtnSearchQuitSearch = New System.Windows.Forms.Button()
@@ -161,7 +162,7 @@ Partial Class FrmGamePeruser
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(384, 192)
+        Me.ClientSize = New System.Drawing.Size(384, 191)
         Me.Controls.Add(Me.LblSpinnerRight)
         Me.Controls.Add(Me.LblSpinnerLeft)
         Me.Controls.Add(Me.BtnLeaderboards)
@@ -169,6 +170,7 @@ Partial Class FrmGamePeruser
         Me.Controls.Add(Me.LblMiniTips)
         Me.Controls.Add(Me.LblStatus)
         Me.Controls.Add(Me.Menu)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.Menu
         Me.MaximizeBox = False
         Me.MaximumSize = New System.Drawing.Size(400, 230)

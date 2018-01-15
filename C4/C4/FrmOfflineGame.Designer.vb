@@ -23,6 +23,7 @@ Partial Class FrmOffline
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmOffline))
         Me.PnlBoard = New System.Windows.Forms.Panel()
         Me.TblPnlMain = New System.Windows.Forms.TableLayoutPanel()
         Me.BtnStartStop = New System.Windows.Forms.Button()
@@ -43,6 +44,11 @@ Partial Class FrmOffline
         Me.MainMenu_Settings_Themes_Monochroma = New System.Windows.Forms.ToolStripMenuItem()
         Me.MainMenu_Settings_Themes_Peach = New System.Windows.Forms.ToolStripMenuItem()
         Me.MainMenu_Settings_Themes_Stone = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StPlayerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MainMenu_Settings_FirstPlayer_P1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MainMenu_Settings_FirstPlayer_P2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MainMenu_Settings_FirstPlayer_Random = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MainMenu_Settings_FirstPlayer_Alternator = New System.Windows.Forms.ToolStripMenuItem()
         Me.MainMenu_Help = New System.Windows.Forms.ToolStripMenuItem()
         Me.GetHelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CntxtMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -50,11 +56,6 @@ Partial Class FrmOffline
         Me.Cntxt_Settings = New System.Windows.Forms.ToolStripMenuItem()
         Me.Cntxt_Exit = New System.Windows.Forms.ToolStripMenuItem()
         Me.Cntxt_Help = New System.Windows.Forms.ToolStripMenuItem()
-        Me.StPlayerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MainMenu_Settings_FirstPlayer_P1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MainMenu_Settings_FirstPlayer_P2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MainMenu_Settings_FirstPlayer_Random = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MainMenu_Settings_FirstPlayer_Alternator = New System.Windows.Forms.ToolStripMenuItem()
         Me.TblPnlMain.SuspendLayout()
         Me.TblPnlInfo.SuspendLayout()
         Me.MainMenuStrip.SuspendLayout()
@@ -200,52 +201,83 @@ Partial Class FrmOffline
         'MainMenu_Main_Exit
         '
         Me.MainMenu_Main_Exit.Name = "MainMenu_Main_Exit"
-        Me.MainMenu_Main_Exit.Size = New System.Drawing.Size(152, 22)
+        Me.MainMenu_Main_Exit.Size = New System.Drawing.Size(140, 22)
         Me.MainMenu_Main_Exit.Text = "Exit to Menu"
         '
         'SettingsToolStripMenuItem
         '
         Me.SettingsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ThemesToolStripMenuItem, Me.StPlayerToolStripMenuItem})
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(140, 22)
         Me.SettingsToolStripMenuItem.Text = "Settings"
         '
         'ThemesToolStripMenuItem
         '
         Me.ThemesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MainMenu_Settings_Themes_Basic, Me.MainMenu_Settings_Themes_Blueberry, Me.MainMenu_Settings_Themes_Monochroma, Me.MainMenu_Settings_Themes_Peach, Me.MainMenu_Settings_Themes_Stone})
         Me.ThemesToolStripMenuItem.Name = "ThemesToolStripMenuItem"
-        Me.ThemesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ThemesToolStripMenuItem.Size = New System.Drawing.Size(124, 22)
         Me.ThemesToolStripMenuItem.Text = "Themes"
         '
         'MainMenu_Settings_Themes_Basic
         '
         Me.MainMenu_Settings_Themes_Basic.Name = "MainMenu_Settings_Themes_Basic"
-        Me.MainMenu_Settings_Themes_Basic.Size = New System.Drawing.Size(152, 22)
+        Me.MainMenu_Settings_Themes_Basic.Size = New System.Drawing.Size(147, 22)
         Me.MainMenu_Settings_Themes_Basic.Text = "Basic"
         '
         'MainMenu_Settings_Themes_Blueberry
         '
         Me.MainMenu_Settings_Themes_Blueberry.Name = "MainMenu_Settings_Themes_Blueberry"
-        Me.MainMenu_Settings_Themes_Blueberry.Size = New System.Drawing.Size(152, 22)
+        Me.MainMenu_Settings_Themes_Blueberry.Size = New System.Drawing.Size(147, 22)
         Me.MainMenu_Settings_Themes_Blueberry.Text = "Blueberry"
         '
         'MainMenu_Settings_Themes_Monochroma
         '
         Me.MainMenu_Settings_Themes_Monochroma.Name = "MainMenu_Settings_Themes_Monochroma"
-        Me.MainMenu_Settings_Themes_Monochroma.Size = New System.Drawing.Size(152, 22)
+        Me.MainMenu_Settings_Themes_Monochroma.Size = New System.Drawing.Size(147, 22)
         Me.MainMenu_Settings_Themes_Monochroma.Text = "Monochroma"
         '
         'MainMenu_Settings_Themes_Peach
         '
         Me.MainMenu_Settings_Themes_Peach.Name = "MainMenu_Settings_Themes_Peach"
-        Me.MainMenu_Settings_Themes_Peach.Size = New System.Drawing.Size(152, 22)
+        Me.MainMenu_Settings_Themes_Peach.Size = New System.Drawing.Size(147, 22)
         Me.MainMenu_Settings_Themes_Peach.Text = "Peach"
         '
         'MainMenu_Settings_Themes_Stone
         '
         Me.MainMenu_Settings_Themes_Stone.Name = "MainMenu_Settings_Themes_Stone"
-        Me.MainMenu_Settings_Themes_Stone.Size = New System.Drawing.Size(152, 22)
+        Me.MainMenu_Settings_Themes_Stone.Size = New System.Drawing.Size(147, 22)
         Me.MainMenu_Settings_Themes_Stone.Text = "Stone"
+        '
+        'StPlayerToolStripMenuItem
+        '
+        Me.StPlayerToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MainMenu_Settings_FirstPlayer_P1, Me.MainMenu_Settings_FirstPlayer_P2, Me.MainMenu_Settings_FirstPlayer_Random, Me.MainMenu_Settings_FirstPlayer_Alternator})
+        Me.StPlayerToolStripMenuItem.Name = "StPlayerToolStripMenuItem"
+        Me.StPlayerToolStripMenuItem.Size = New System.Drawing.Size(124, 22)
+        Me.StPlayerToolStripMenuItem.Text = "1st Player"
+        '
+        'MainMenu_Settings_FirstPlayer_P1
+        '
+        Me.MainMenu_Settings_FirstPlayer_P1.Name = "MainMenu_Settings_FirstPlayer_P1"
+        Me.MainMenu_Settings_FirstPlayer_P1.Size = New System.Drawing.Size(133, 22)
+        Me.MainMenu_Settings_FirstPlayer_P1.Text = "Player 1"
+        '
+        'MainMenu_Settings_FirstPlayer_P2
+        '
+        Me.MainMenu_Settings_FirstPlayer_P2.Name = "MainMenu_Settings_FirstPlayer_P2"
+        Me.MainMenu_Settings_FirstPlayer_P2.Size = New System.Drawing.Size(133, 22)
+        Me.MainMenu_Settings_FirstPlayer_P2.Text = "Player 2"
+        '
+        'MainMenu_Settings_FirstPlayer_Random
+        '
+        Me.MainMenu_Settings_FirstPlayer_Random.Name = "MainMenu_Settings_FirstPlayer_Random"
+        Me.MainMenu_Settings_FirstPlayer_Random.Size = New System.Drawing.Size(133, 22)
+        Me.MainMenu_Settings_FirstPlayer_Random.Text = "Random"
+        '
+        'MainMenu_Settings_FirstPlayer_Alternator
+        '
+        Me.MainMenu_Settings_FirstPlayer_Alternator.Name = "MainMenu_Settings_FirstPlayer_Alternator"
+        Me.MainMenu_Settings_FirstPlayer_Alternator.Size = New System.Drawing.Size(133, 22)
+        Me.MainMenu_Settings_FirstPlayer_Alternator.Text = "Alternating"
         '
         'MainMenu_Help
         '
@@ -291,37 +323,6 @@ Partial Class FrmOffline
         Me.Cntxt_Help.Size = New System.Drawing.Size(154, 22)
         Me.Cntxt_Help.Text = "Help"
         '
-        'StPlayerToolStripMenuItem
-        '
-        Me.StPlayerToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MainMenu_Settings_FirstPlayer_P1, Me.MainMenu_Settings_FirstPlayer_P2, Me.MainMenu_Settings_FirstPlayer_Random, Me.MainMenu_Settings_FirstPlayer_Alternator})
-        Me.StPlayerToolStripMenuItem.Name = "StPlayerToolStripMenuItem"
-        Me.StPlayerToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.StPlayerToolStripMenuItem.Text = "1st Player"
-        '
-        'MainMenu_Settings_FirstPlayer_P1
-        '
-        Me.MainMenu_Settings_FirstPlayer_P1.Name = "MainMenu_Settings_FirstPlayer_P1"
-        Me.MainMenu_Settings_FirstPlayer_P1.Size = New System.Drawing.Size(152, 22)
-        Me.MainMenu_Settings_FirstPlayer_P1.Text = "Player 1"
-        '
-        'MainMenu_Settings_FirstPlayer_P2
-        '
-        Me.MainMenu_Settings_FirstPlayer_P2.Name = "MainMenu_Settings_FirstPlayer_P2"
-        Me.MainMenu_Settings_FirstPlayer_P2.Size = New System.Drawing.Size(152, 22)
-        Me.MainMenu_Settings_FirstPlayer_P2.Text = "Player 2"
-        '
-        'MainMenu_Settings_FirstPlayer_Random
-        '
-        Me.MainMenu_Settings_FirstPlayer_Random.Name = "MainMenu_Settings_FirstPlayer_Random"
-        Me.MainMenu_Settings_FirstPlayer_Random.Size = New System.Drawing.Size(152, 22)
-        Me.MainMenu_Settings_FirstPlayer_Random.Text = "Random"
-        '
-        'MainMenu_Settings_FirstPlayer_Alternator
-        '
-        Me.MainMenu_Settings_FirstPlayer_Alternator.Name = "MainMenu_Settings_FirstPlayer_Alternator"
-        Me.MainMenu_Settings_FirstPlayer_Alternator.Size = New System.Drawing.Size(152, 22)
-        Me.MainMenu_Settings_FirstPlayer_Alternator.Text = "Alternating"
-        '
         'FrmOffline
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -330,6 +331,7 @@ Partial Class FrmOffline
         Me.Controls.Add(Me.TblPnlMain)
         Me.Controls.Add(Me.PnlBoard)
         Me.Controls.Add(Me.MainMenuStrip)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
         Me.MaximizeBox = False
         Me.MaximumSize = New System.Drawing.Size(1000, 650)

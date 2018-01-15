@@ -22,6 +22,7 @@ Partial Class FrmEntry
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmEntry))
         Me.BtnSolo = New System.Windows.Forms.Button()
         Me.BtnOnlinePlay = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -73,6 +74,7 @@ Partial Class FrmEntry
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.BtnOnlinePlay)
         Me.Controls.Add(Me.BtnSolo)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
         Me.MaximizeBox = False
         Me.MaximumSize = New System.Drawing.Size(252, 220)

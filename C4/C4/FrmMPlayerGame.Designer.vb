@@ -22,6 +22,7 @@ Partial Class FrmMPlayerGame
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmMPlayerGame))
         Me.PnlBoard = New System.Windows.Forms.Panel()
         Me.TxtChatHistory = New System.Windows.Forms.TextBox()
         Me.TxtChatSender = New System.Windows.Forms.TextBox()
@@ -215,6 +216,7 @@ Partial Class FrmMPlayerGame
         Me.Controls.Add(Me.TxtChatHistory)
         Me.Controls.Add(Me.PnlBoard)
         Me.Controls.Add(Me.MenuStrip1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "FrmMPlayerGame"
         Me.Text = "FrmMPlayerGame"

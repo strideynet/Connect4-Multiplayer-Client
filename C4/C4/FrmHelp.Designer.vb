@@ -22,6 +22,7 @@ Partial Class FrmHelp
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmHelp))
         Me.CbbxSelector = New System.Windows.Forms.ComboBox()
         Me.TxtHelp = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
@@ -56,6 +57,7 @@ Partial Class FrmHelp
         Me.ClientSize = New System.Drawing.Size(484, 361)
         Me.Controls.Add(Me.TxtHelp)
         Me.Controls.Add(Me.CbbxSelector)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "FrmHelp"
         Me.Text = "Help"

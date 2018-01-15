@@ -17,7 +17,7 @@
     End Sub
 
     Private Sub BtnInfo_Click(sender As Object, e As EventArgs) Handles BtnInfo.Click
-        FrmInformation.Show()
+        FrmInfo.Show()
         Me.Close()
     End Sub
 End Class
