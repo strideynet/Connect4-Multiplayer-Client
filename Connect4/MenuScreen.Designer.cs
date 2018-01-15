@@ -117,7 +117,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(300, 300);
             this.Name = "MenuScreen";
-            this.Text = "Connect 4 Main Menu";
+            this.Text = "SHyTY 4 Main Menu";
             this.ResumeLayout(false);
             this.PerformLayout();
 
