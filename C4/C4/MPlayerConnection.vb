@@ -27,7 +27,7 @@ Class MPlayerConnection
             ControlForm.BeginInvoke(New MessageHandlerDelegate(AddressOf MessageHandler), New Object() {sender, E})
         Else
             Dim MSG As Json.Linq.JObject = Json.Linq.JObject.Parse(E.Data)
-
+            Debug.WriteLine(MSG.ToString())
             If CStr(MSG("type")) = "RegistrationReturn" Then
                 Debug.WriteLine("RegistrationReturn Message!")
                 RegistrationReturnHandler(MSG)
@@ -37,6 +37,12 @@ Class MPlayerConnection
             ElseIf CStr(MSG("type")) = "MatchUpdate" Then
                 Debug.WriteLine("MatchUpdate Message!")
                 MatchUpdateHandler(MSG)
+            ElseIf CStr(MSG("type")) = "ChatMessageReturn" Then
+                Debug.WriteLine("ChatReceived Message!")
+                ChatReceivedHandler(MSG)
+            ElseIf CStr(MSG("type")) = "MatchEnd" Then
+                Debug.WriteLine("MatchEnd Message!")
+                EndMatchHandler(MSG)
             End If
 
         End If
@@ -86,6 +92,29 @@ Class MPlayerConnection
 
     End Sub
 
+    Private Sub ChatReceivedHandler(MSG As Object)
+        If ControlForm.InvokeRequired = True Then
+            Debug.WriteLine("Chat receiver handler got invoked!")
+            ControlForm.BeginInvoke(New GenericDelegate(AddressOf ChatReceivedHandler), New Object() {MSG})
+        Else
+            Debug.WriteLine("Chat received")
+            FrmMPlayerGame.ReceiveChat(MSG)
+        End If
+    End Sub
+
+    Private Sub EndMatchHandler(MSG As Object)
+        If ControlForm.InvokeRequired = True Then
+            Debug.WriteLine("Match end handler got invoked")
+            ControlForm.BeginInvoke(New GenericDelegate(AddressOf EndMatchHandler), New Object() {MSG})
+        Else
+            If CStr(MSG("data")("type")) = "1" Then
+                FrmMPlayerGame.EndGameByWin(MSG)
+            Else
+                FrmMPlayerGame.EndGameBySubmit(MSG)
+            End If
+        End If
+    End Sub
+
 #End Region
 
 #Region "Send Commands To Server"
@@ -95,8 +124,15 @@ Class MPlayerConnection
         MyClientWebSocket.Send(Json.JsonConvert.SerializeObject(MSG))
     End Sub
 
-    Public Sub InformConnectionEnd(Optional Reason As String = "")
+    Public Sub InformConnectionEnd()
         ' do this
+    End Sub
+
+    Public Sub SendChat(ByVal ChatMSG As String)
+
+        Dim MSGToSend As New C4.MSGTypes.ChatMessage(Me.JWT, ChatMSG)
+        MyClientWebSocket.Send(Json.JsonConvert.SerializeObject(MSGToSend))
+
     End Sub
 
 #End Region
@@ -112,6 +148,10 @@ Class MPlayerConnection
 
 
 
+    End Sub
+
+    Private Sub OnConnectionClose() Handles MyClientWebSocket.OnClose
+        Debug.WriteLine("Connection Closed")
     End Sub
 
     Public Sub UpdateReferenceForm(NewForm As Object)

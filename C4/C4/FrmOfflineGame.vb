@@ -66,7 +66,7 @@
                 'Debug.WriteLine(MiniY * Ylooper)
                 e.Graphics.DrawLine(GP, 0, CInt(Math.Floor((SizeY / 6) * Ylooper)), SizeX, CInt(Math.Floor((SizeY / 6) * Ylooper)))
             Next
-
+            'ByLEwis
             GP.Dispose()
 
             Dim EP As New Pen(Game.EllipsePen.Color, Game.EllipsePen.Width)
@@ -111,8 +111,9 @@
     Private Sub PerformGravity()
         DoRedraw = True
         PnlBoard.Refresh()
-        For x = 0 To 5
-            Dim ChangeMade As Boolean = False
+        Dim ChangeMade As Boolean = True
+        While ChangeMade = True
+            ChangeMade = False
             For Column = 0 To 6
                 For Row = 4 To 0 Step -1
                     If Game.Board(Column, Row) <> 0 And Game.Board(Column, Row + 1) = 0 Then
@@ -130,7 +131,7 @@
                 DoRedraw = True
                 PnlBoard.Refresh()
             End If
-        Next
+        End While
     End Sub
 
     Private Sub DoInfinityAndBeyond()
@@ -401,7 +402,7 @@
             ElseIf Column = -2 Then
                 LblPrevMoveDetails.Text = "No game in progress"
             Else
-                If Game.PlayerTurn = False Then LblPrevMoveDetails.Text = Game.P1Name : Else LblPrevMoveDetails.Text = Game.P2Name
+                If Game.PlayerTurn = False Then LblPrevMoveDetails.Text = Game.P1Name Else LblPrevMoveDetails.Text = Game.P2Name
                 LblPrevMoveDetails.Text &= " moved in column " & Column
             End If
 
@@ -457,4 +458,3 @@
         End If
     End Sub
 End Class
-

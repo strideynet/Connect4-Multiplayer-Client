@@ -19,7 +19,7 @@
 
     Private Sub DeploySmoothMusicToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeploySmoothMusicToolStripMenuItem.Click
         My.Computer.Audio.Stop()
-        My.Computer.Audio.Play(My.Resources.Smells_Like_Teen_Spirit_but_every_note_or_chord_is, AudioPlayMode.BackgroundLoop)
+        My.Computer.Audio.Play(My.Resources.Song, AudioPlayMode.BackgroundLoop)
     End Sub
 
     Private Sub BtnSearchQuitSearch_Click(sender As Object, e As EventArgs) Handles BtnSearchQuitSearch.Click
@@ -100,14 +100,16 @@
     Public Sub ExitMatchmaking(Optional Sender As Object = Nothing, Optional E As FormClosedEventArgs = Nothing) Handles Me.FormClosed
         ' Removes you from the queue when you press "exit search", "leaderboards" or exit the application
         'My.Computer.Audio.Stop()
+        If Not Application.OpenForms().OfType(Of FrmMPlayerGame).Any Then
+            BtnSearchQuitSearch.Text = "Begin Search"
+            LblStatus.BackColor = Color.Firebrick
 
-        BtnSearchQuitSearch.Text = "Begin Search"
-        LblStatus.BackColor = Color.Firebrick
+            If Searching = True Then
+                Searching = False
+                Connection.CloseConnection()
+                MsgBox("Exiting matchmaking!")
 
-        If Searching = True Then
-            Searching = False
-            'MsgBox("Exiting matchmaking!")
-
+            End If
         End If
     End Sub
 
@@ -117,7 +119,7 @@
             Dim UsrName As String = InputBox("What's your username?", "C-4: Online Play", "Anonymous Moose")
             If UsrName = "" Then UsrName = "Anonymous Guadaloupe"
             ExternalVars.LocalName = UsrName
-            ExternalVars.Connection = New MPlayerConnection("ws://91.134.107.74:80/", UsrName, Me) ' "ws://86.138.91.20:80/" (srvr), "ws://127.0.0.1:80/" (local)
+            ExternalVars.Connection = New MPlayerConnection("ws://91.134.107.74:80/", UsrName, Me) ' "ws://91.134.107.74:80/" (srvr), "ws://127.0.0.1:80/" (local)
 
 
         Catch ERR As Exception
@@ -127,7 +129,7 @@
     End Sub
 
     Public Sub StartGame(MSG As Object)
-        MsgBox(MSG.ToString())
+        'MsgBox(MSG.ToString())
         ExternalVars.LocalNumber = CInt(MSG("data")("localNum"))
         ExternalVars.OpponentName = CStr(MSG("data")("opponent"))
         FrmMPlayerGame.Show()

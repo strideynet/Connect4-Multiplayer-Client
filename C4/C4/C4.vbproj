@@ -89,11 +89,22 @@
     <Compile Include="FrmHelp.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FrmInformation.Designer.vb">
+      <DependentUpon>FrmInformation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmInformation.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmMPlayerGame.Designer.vb">
       <DependentUpon>FrmMPlayerGame.vb</DependentUpon>
     </Compile>
     <Compile Include="FrmMPlayerGame.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="OfflineGameDetails.vb" />
     <Compile Include="FrmGamePeruser.Designer.vb">
@@ -116,11 +127,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
-    <Compile Include="My Project\Resources.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="My Project\Settings.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -136,6 +142,9 @@
     <EmbeddedResource Include="FrmHelp.resx">
       <DependentUpon>FrmHelp.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmInformation.resx">
+      <DependentUpon>FrmInformation.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmMPlayerGame.resx">
       <DependentUpon>FrmMPlayerGame.vb</DependentUpon>
     </EmbeddedResource>
@@ -147,9 +156,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -166,7 +175,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Resources\Smells_Like_Teen_Spirit_but_every_note_or_chord_is.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Song.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

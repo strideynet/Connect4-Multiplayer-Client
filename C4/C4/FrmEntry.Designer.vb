@@ -25,6 +25,7 @@ Partial Class FrmEntry
         Me.BtnSolo = New System.Windows.Forms.Button()
         Me.BtnOnlinePlay = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.BtnInfo = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'BtnSolo
@@ -54,18 +55,28 @@ Partial Class FrmEntry
         Me.Label1.Text = "ℵ presents... Connect 4"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'BtnInfo
+        '
+        Me.BtnInfo.Location = New System.Drawing.Point(12, 159)
+        Me.BtnInfo.Name = "BtnInfo"
+        Me.BtnInfo.Size = New System.Drawing.Size(212, 23)
+        Me.BtnInfo.TabIndex = 3
+        Me.BtnInfo.Text = "Info"
+        Me.BtnInfo.UseVisualStyleBackColor = True
+        '
         'FrmEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(236, 165)
+        Me.ClientSize = New System.Drawing.Size(236, 181)
+        Me.Controls.Add(Me.BtnInfo)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.BtnOnlinePlay)
         Me.Controls.Add(Me.BtnSolo)
         Me.KeyPreview = True
         Me.MaximizeBox = False
-        Me.MaximumSize = New System.Drawing.Size(252, 204)
-        Me.MinimumSize = New System.Drawing.Size(252, 204)
+        Me.MaximumSize = New System.Drawing.Size(252, 220)
+        Me.MinimumSize = New System.Drawing.Size(252, 220)
         Me.Name = "FrmEntry"
         Me.Text = "C - 4: Menu"
         Me.ResumeLayout(False)
@@ -74,4 +85,5 @@ Partial Class FrmEntry
     Friend WithEvents BtnSolo As System.Windows.Forms.Button
     Friend WithEvents BtnOnlinePlay As System.Windows.Forms.Button
     Friend WithEvents Label1 As Label
+    Friend WithEvents BtnInfo As System.Windows.Forms.Button
 End Class

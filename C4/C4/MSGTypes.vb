@@ -9,7 +9,7 @@
             End Get
         End Property
 
-        Public agent As String = "LWM C4 v1.0"
+        Public agent As String = "LWM C4"
 
         Public Structure DataStructure : End Structure
         Public data As DataStructure
@@ -47,13 +47,13 @@
 
     Class ChatMessage : Inherits AuthenticatedMessageShell
         Public Shadows Structure DataStructure
-            Public chat As String
+            Public message As String
         End Structure
         Public Shadows data As DataStructure
 
         Public Sub New(jwt As String, ChatMSG As String)
             MyBase.New(jwt)
-            Me.data.chat = ChatMSG
+            Me.data.message = ChatMSG
         End Sub
     End Class
 

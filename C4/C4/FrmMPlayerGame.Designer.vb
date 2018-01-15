@@ -40,8 +40,8 @@ Partial Class FrmMPlayerGame
         Me.BtnSendChat = New System.Windows.Forms.Button()
         Me.LblCurrentTurn = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.LblP1Name = New System.Windows.Forms.Label()
         Me.LblP2Name = New System.Windows.Forms.Label()
+        Me.LblP1Name = New System.Windows.Forms.Label()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -158,6 +158,7 @@ Partial Class FrmMPlayerGame
         'BtnSendChat
         '
         Me.BtnSendChat.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnSendChat.Enabled = False
         Me.BtnSendChat.Location = New System.Drawing.Point(625, 359)
         Me.BtnSendChat.Name = "BtnSendChat"
         Me.BtnSendChat.Size = New System.Drawing.Size(55, 20)
@@ -176,6 +177,7 @@ Partial Class FrmMPlayerGame
         '
         'Panel1
         '
+        Me.Panel1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel1.Controls.Add(Me.LblP2Name)
         Me.Panel1.Controls.Add(Me.LblP1Name)
         Me.Panel1.Controls.Add(Me.LblCurrentTurn)
@@ -183,15 +185,6 @@ Partial Class FrmMPlayerGame
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(235, 73)
         Me.Panel1.TabIndex = 6
-        '
-        'LblP1Name
-        '
-        Me.LblP1Name.Location = New System.Drawing.Point(3, 1)
-        Me.LblP1Name.Name = "LblP1Name"
-        Me.LblP1Name.Size = New System.Drawing.Size(229, 13)
-        Me.LblP1Name.TabIndex = 6
-        Me.LblP1Name.Text = "Player 1: "
-        Me.LblP1Name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'LblP2Name
         '
@@ -201,6 +194,15 @@ Partial Class FrmMPlayerGame
         Me.LblP2Name.TabIndex = 7
         Me.LblP2Name.Text = "Player 2: "
         Me.LblP2Name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LblP1Name
+        '
+        Me.LblP1Name.Location = New System.Drawing.Point(3, 1)
+        Me.LblP1Name.Name = "LblP1Name"
+        Me.LblP1Name.Size = New System.Drawing.Size(229, 13)
+        Me.LblP1Name.TabIndex = 6
+        Me.LblP1Name.Text = "Player 1: "
+        Me.LblP1Name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'FrmMPlayerGame
         '

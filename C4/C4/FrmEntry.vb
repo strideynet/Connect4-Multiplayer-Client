@@ -16,7 +16,8 @@
         End If
     End Sub
 
-    Private Sub DebugMeBtn_Click(sender As Object, e As EventArgs) 
-        FrmMPlayerGame.Show()
+    Private Sub BtnInfo_Click(sender As Object, e As EventArgs) Handles BtnInfo.Click
+        FrmInformation.Show()
+        Me.Close()
     End Sub
 End Class

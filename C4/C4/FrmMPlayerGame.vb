@@ -85,7 +85,6 @@
         If E.Button = Windows.Forms.MouseButtons.Left Then
             Dim Location As Integer = E.Location.X
             Dim Seventh As Double = Sender.Width / 7
-            Dim Player As Integer = 1
 
             If Location >= 0 And Location < Seventh Then
                 'MsgBox(0)
@@ -224,8 +223,10 @@
 
         If Game.MyTurn = True Then
             LblCurrentTurn.Text = "It's your turn"
+            Debug.WriteLine("I start")
         Else
             LblCurrentTurn.Text = "It's " & ExternalVars.OpponentName & "'s turn"
+            Debug.WriteLine("They start")
         End If
     End Sub
 
@@ -237,7 +238,7 @@
             Next
         Next
         Game.MyTurn = (Game.LocalNum = CInt(MSG("data")("currentPlayer")))
-
+        Debug.WriteLine(Game.MyTurn)
         If Game.MyTurn = True Then
             LblCurrentTurn.Text = "It's your turn"
         Else
@@ -250,7 +251,7 @@
     End Sub
 
     Private Sub TxtChatSender_TextChanged(sender As Object, e As EventArgs) Handles TxtChatSender.TextChanged
-        BtnSendChat.Enabled = (TxtChatSender.Text = "")
+        BtnSendChat.Enabled = Not (TxtChatSender.Text = "")
 
     End Sub
 
@@ -258,4 +259,37 @@
         FrmHelp.Show()
     End Sub
 
+    Private Sub BtnSendChat_Click(sender As Object, e As EventArgs) Handles BtnSendChat.Click
+        Dim TxtToSend As String = TxtChatSender.Text
+        TxtChatSender.Text = ""
+        ExternalVars.Connection.SendChat(TxtToSend)
+    End Sub
+
+    Public Sub ReceiveChat(ByVal MSG As Object)
+        TxtChatHistory.Text &= MSG("data")("sender") & ": " & MSG("data")("message") & vbCrLf
+    End Sub
+
+    Public Sub EndGameByWin(ByVal MSG As Object)
+        If CInt(MSG("data")("winner")) = ExternalVars.LocalNumber Then
+            MsgBox("You win!" & vbCrLf & "The world shall sing your praises for decades to come", , "VICTORY")
+            FrmEntry.Show()
+            Me.Close()
+        Else
+            MsgBox("You win!" & vbCrLf & "The world shall sing your praises for decades to come", , "DEFEAT")
+            FrmEntry.Show()
+            Me.Close()
+        End If
+    End Sub
+
+    Public Sub EndGameBySubmit(ByVal MSG As Object)
+        MsgBox("The opponent couldn't handle the pressure." & vbCrLf & "You Win by Submission!", , "VICTORY")
+        FrmEntry.Show()
+        Me.Close()
+    End Sub
+
+    Private Sub ExitToMenuToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToMenuToolStripMenuItem.Click
+        MsgBox("Was the pressure getting to you?" & vbCrLf & "You lose by submission", , "DEFEAT")
+        FrmEntry.Show()
+        Me.Close()
+    End Sub
 End Class
