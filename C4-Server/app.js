@@ -4,8 +4,7 @@ const jwt = require('jsonwebtoken')
 
 const wss = new WebSocket.Server({ port: 80 })
 
-const allPlayers = {}
-const wsToID = {}
+const allPlayers = []
 
 const SERVER_AGENT = 'C4P Server'
 const SERVER_SECRET = 'temporarySecret'
@@ -20,36 +19,29 @@ wss.on('connection', function (ws) {
   ws.on('error', function (error) {
     if (error.code !== 'ECONNRESET') {
       console.log(error)
-    } else {
-      webSocketDisconnect(ws);      
+    } else {     
     }
   })
 
-  ws.on('close', function(code, reason) {
-    webSocketDisconnect(ws);
-  })
 })
 
-function webSocketDisconnect(ws) {
-  let id = wsToID[ws]
+function webSocketDisconnect(player) {
+  console.log(player.id + ' is alive: ' + player.isAlive)
+  delete allPlayers[player.id] // Delete player
 
-  if (id && allPlayers[id]) {
-    let player = allPlayers[id]
+  if (player.match) {
+    let otherPlayer = 0
+    console.log(player.boardNumber + ' has abandoned a match...')
 
-    if (player.match) {
-      let otherPlayer = 0
-      console.log(player.boardNumber + ' has abandoned a match...')
-
-      if (player.boardNumber === 1) {
-        otherPlayer = 10
-      } else {
-        otherPlayer = 1
-      }
-      console.log(otherPlayer + ' has won due to abandon...')
-      player.match.endMatch(player.match.players[otherPlayer], 2)
-    } else if (allPlayers[id] == waitingForMatch) { // If player is in queue, dequeue
-      waitingForMatch = null;
+    if (player.boardNumber === 1) {
+      otherPlayer = 10
+    } else {
+      otherPlayer = 1
     }
+    console.log(otherPlayer + ' has won due to abandon...')
+    player.match.endMatch(player.match.players[otherPlayer], 2)
+  } else if (allPlayers[player.id] == waitingForMatch) { // If player is in queue, dequeue
+    waitingForMatch = null;
   }
 }
 
@@ -112,6 +104,11 @@ const messageHandles = {
       req.user.playPosition(req.data.column)
     } else {
       return console.error('Invalid message recieved. Data fields incorrect.')
+    }
+  },
+  'C4Pong': function (ws, req) {
+    if (req.user) {
+      req.user.isAlive = true;
     }
   }
 }
@@ -310,12 +307,9 @@ class Match {
     this.players[1].match = null;
     this.players[10].match = null;
 
-    if (type == 2) {
-      winner.ws.send(JSON.stringify(message))
-    } else {
-      this.players[1].ws.send(JSON.stringify(message))
-      this.players[10].ws.send(JSON.stringify(message))
-    }
+
+    if (this.players[1].ws.readyState === WebSocket.OPEN){ this.players[1].ws.send(JSON.stringify(message)) }
+    if (this.players[10].ws.readyState === WebSocket.OPEN){ this.players[10].ws.send(JSON.stringify(message)) }
   }
 }
 
@@ -324,15 +318,43 @@ class Player {
     this.id = shortid.generate()
 
     allPlayers[this.id] = this
-    wsToID[ws] = this.id
 
     this.ws = ws
     this.username = username
     this.boardNumber = 0
     this.match = null
+
+    this.isAlive = true;
+
+    console.log(allPlayers)
   }
 
   playPosition (column) {
     this.match.attemptPlay(this, column)
   }
 }
+
+const checkAlive = setInterval(function () {
+  for (var prop in allPlayers) {
+    if (allPlayers.hasOwnProperty(prop)) 
+    {
+      let ply = allPlayers[prop]
+
+      if (ply.isAlive === false) {
+        return webSocketDisconnect(ply)
+      } else {
+        ply.isAlive = false;
+  
+        if (ply.ws.readyState === WebSocket.OPEN) {
+          ply.ws.send(JSON.stringify({
+            type: 'C4Ping',
+            agent: SERVER_AGENT,
+            data: {}
+          }))
+        } else {
+          webSocketDisconnect(ply)
+        }
+      }
+    }
+  }
+}, 500);

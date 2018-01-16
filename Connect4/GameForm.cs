@@ -161,6 +161,7 @@ namespace Connect4 {
         public void updateLabels()
         {
             lblTurn.Text = gameLogic.localTurn.ToString();
+            lblUsername.Text = gameLogic.localPlayer.ToString();
         }
     }
 }

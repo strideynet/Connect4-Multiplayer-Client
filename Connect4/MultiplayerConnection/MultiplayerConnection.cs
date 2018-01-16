@@ -43,6 +43,9 @@ namespace Connect4
                 ChatMessageHandler(message);
             } else if (message.type == "MatchEnd") {
                 MatchEndHandler(message);
+            } else if (message.type == "C4Ping")
+            {
+                C4PingHandler(message);
             }
         }
 
@@ -53,6 +56,12 @@ namespace Connect4
             jwt = message.data.jwt;
 
             var reply = new MessageTypes.MatchRequest(jwt); //Now we are registered, apply for match
+            clientWebSocket.Send(JsonConvert.SerializeObject(reply));
+        }
+
+        private void C4PingHandler(dynamic message)
+        {
+            var reply = new MessageTypes.C4Pong(this.jwt);
             clientWebSocket.Send(JsonConvert.SerializeObject(reply));
         }
 
@@ -120,7 +129,7 @@ namespace Connect4
                 string winner = ((int)message.data.winner == gameLogic.localPlayer ? "You" : "They");
                 System.Windows.Forms.MessageBox.Show(winner + " win the game!");
 
-                this.endSession();
+                gameLogic.gameForm.Close();
             }
         }
 
@@ -143,7 +152,6 @@ namespace Connect4
         public void endSession() // Shuts down session at end of match
         {
             clientWebSocket.Close();
-            gameLogic.gameForm.Close();
             gameLogic = null;
         }
 

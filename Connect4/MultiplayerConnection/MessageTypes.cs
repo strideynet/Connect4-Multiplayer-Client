@@ -45,6 +45,14 @@ namespace Connect4.MessageTypes
         public MatchRequest(string jwt) : base(jwt) { }
     }
 
+    class C4Pong : AuthenticatedMessageShell
+    {
+        public new struct DataStructure { };
+        public new DataStructure data;
+
+        public C4Pong(string jwt) : base(jwt) { }
+    }
+
     class ChatMessage : AuthenticatedMessageShell
     {
         public new struct DataStructure {
