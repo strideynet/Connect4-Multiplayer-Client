@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 const wss = new WebSocket.Server({ port: 80 })
 
 const allPlayers = {}
+const wsToID = {}
 
 const SERVER_AGENT = 'C4P Server'
 const SERVER_SECRET = 'temporarySecret'
@@ -19,9 +20,38 @@ wss.on('connection', function (ws) {
   ws.on('error', function (error) {
     if (error.code !== 'ECONNRESET') {
       console.log(error)
+    } else {
+      webSocketDisconnect(ws);      
     }
   })
+
+  ws.on('close', function(code, reason) {
+    webSocketDisconnect(ws);
+  })
 })
+
+function webSocketDisconnect(ws) {
+  let id = wsToID[ws]
+
+  if (id && allPlayers[id]) {
+    let player = allPlayers[id]
+
+    if (player.match) {
+      let otherPlayer = 0
+      console.log(player.boardNumber + ' has abandoned a match...')
+
+      if (player.boardNumber === 1) {
+        otherPlayer = 10
+      } else {
+        otherPlayer = 1
+      }
+      console.log(otherPlayer + ' has won due to abandon...')
+      player.match.endMatch(player.match.players[otherPlayer], 2)
+    } else if (allPlayers[id] == waitingForMatch) { // If player is in queue, dequeue
+      waitingForMatch = null;
+    }
+  }
+}
 
 /*
 message datatype:
@@ -266,6 +296,8 @@ class Match {
 
   // Type: 1 - Standard Win 2 - Disconnect by loser
   endMatch (winner, type) {
+    this.live = false
+
     let message = {
       agent: SERVER_AGENT,
       type: "MatchEnd",
@@ -275,9 +307,15 @@ class Match {
       }
     }
 
-    this.players[1].ws.send(JSON.stringify(message))
-    this.players[10].ws.send(JSON.stringify(message))
-    this.live = false
+    this.players[1].match = null;
+    this.players[10].match = null;
+
+    if (type == 2) {
+      winner.ws.send(JSON.stringify(message))
+    } else {
+      this.players[1].ws.send(JSON.stringify(message))
+      this.players[10].ws.send(JSON.stringify(message))
+    }
   }
 }
 
@@ -286,6 +324,7 @@ class Player {
     this.id = shortid.generate()
 
     allPlayers[this.id] = this
+    wsToID[ws] = this.id
 
     this.ws = ws
     this.username = username

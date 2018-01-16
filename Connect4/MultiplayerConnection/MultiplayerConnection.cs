@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
+using System;
 using WebSocketSharp;
-using Newtonsoft.Json;
 
 namespace Connect4
 {
@@ -117,7 +113,14 @@ namespace Connect4
             }
             else
             {
-                Console.WriteLine("pleb");
+                gameLogic.localTurn = false; // Prevents further plays
+
+                System.Windows.Forms.MessageBox.Show("Game Ends...");
+
+                string winner = ((int)message.data.winner == gameLogic.localPlayer ? "You" : "They");
+                System.Windows.Forms.MessageBox.Show(winner + " win the game!");
+
+                this.endSession();
             }
         }
 
@@ -135,6 +138,13 @@ namespace Connect4
         {
             var message = new MessageTypes.ChatMessage(this.jwt, messageContent);
             clientWebSocket.Send(JsonConvert.SerializeObject(message));
+        }
+
+        public void endSession() // Shuts down session at end of match
+        {
+            clientWebSocket.Close();
+            gameLogic.gameForm.Close();
+            gameLogic = null;
         }
 
         #endregion

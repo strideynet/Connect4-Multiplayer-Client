@@ -26,7 +26,6 @@ namespace Connect4 {
             p = new Pen(Color.Black);
 
             this.gameLogic = gameLogic;
-            gameLogic.localTurn = true; // Debug
         }
 
         /// <summary>
@@ -110,10 +109,8 @@ namespace Connect4 {
             return gamePosition;
         }
 
-        private void label3_Click(object sender, EventArgs e) {
-        }
-
         private void btnAbandon_Click(object sender, EventArgs e) {
+            gameLogic.multiplayerConnection.endSession();
         }
 
         private void pnlGraphics_MouseDown(object sender, MouseEventArgs e) {
@@ -151,6 +148,11 @@ namespace Connect4 {
                 gameLogic.multiplayerConnection.sendMessage(txtPendingMessage.Text);
                 txtPendingMessage.Text = "";
             }
+        }
+
+        private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            gameLogic.multiplayerConnection.endSession();
         }
     }
 }

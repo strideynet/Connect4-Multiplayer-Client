@@ -79,7 +79,6 @@
             this.lblUsername.Size = new System.Drawing.Size(65, 13);
             this.lblUsername.TabIndex = 3;
             this.lblUsername.Text = "lblUsername";
-            this.lblUsername.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 
@@ -179,6 +178,7 @@
             this.MinimumSize = new System.Drawing.Size(1135, 817);
             this.Name = "GameForm";
             this.Text = "Connect 4 - Game In Progress";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
