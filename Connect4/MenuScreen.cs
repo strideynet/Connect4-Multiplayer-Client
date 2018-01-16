@@ -15,7 +15,7 @@ namespace Connect4 {
         }
 
         private void btnMatchmake_Click(object sender, EventArgs e) {
-            MultiplayerConnection multiplayerConnection = new MultiplayerConnection("ws://127.0.0.1:80/", txtUsername.Text, this); //lwm server: 91.134.107.74
+            MultiplayerConnection multiplayerConnection = new MultiplayerConnection("ws://91.134.107.74:80/", txtUsername.Text, this); //lwm server: 91.134.107.74
         }
     }
 }
