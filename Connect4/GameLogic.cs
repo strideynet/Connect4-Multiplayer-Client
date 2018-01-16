@@ -11,7 +11,20 @@ namespace Connect4
         public int[,] gameBoard = new int[7, 6];
 
         public int localPlayer;
-        public bool localTurn;
+
+        private bool _localTurn;
+        public bool localTurn
+        {
+            get
+            {
+                return _localTurn;
+            }
+            set
+            {
+                _localTurn = value;
+                gameForm.updateLabels();
+            }
+        }
 
         public MultiplayerConnection multiplayerConnection;
         public GameForm gameForm;

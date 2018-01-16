@@ -154,5 +154,13 @@ namespace Connect4 {
         {
             gameLogic.multiplayerConnection.endSession();
         }
+
+        /// <summary>
+        /// Updates the labels from data in gameLogic
+        /// </summary>
+        public void updateLabels()
+        {
+            lblTurn.Text = gameLogic.localTurn.ToString();
+        }
     }
 }
