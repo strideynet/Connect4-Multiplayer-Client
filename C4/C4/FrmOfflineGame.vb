@@ -4,6 +4,7 @@
     Dim FirstPlayer As Boolean = True
     Dim DoRedraw As Boolean = True
     Dim Playing As Boolean = False
+    Dim DoAutomatedIdiocy As Boolean = False
 
     Private Sub Main_Game_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Game.Board(1, 1) = 9 ' 9 = P2
@@ -190,7 +191,20 @@
             TurnInfoUpdater(ChosenCol)
             PerformGravity()
             Dim VictoryCheck As String = CheckWin()
-            If VictoryCheck <> "NONE" Then MsgBox("The winner is: " & VictoryCheck) : MsgBox("Congratulations!") : BtnStartStop_Click(Nothing, Nothing)
+            If VictoryCheck <> "NONE" Then MsgBox("The winner is: " & VictoryCheck) : MsgBox("Congratulations!") : BtnStartStop_Click(Nothing, Nothing) : Exit Sub
+
+            If DoAutomatedIdiocy = True And Game.PlayerTurn = False Then
+                Game.PlayerTurn = True
+                TurnInfoUpdater(DoAIMove())
+                PerformGravity()
+                VictoryCheck = CheckWin()
+                If VictoryCheck <> "NONE" Then
+                    MsgBox("The winner is: " & VictoryCheck)
+                    MsgBox("Congratulations!")
+                    BtnStartStop_Click(Nothing, Nothing)
+                End If
+            End If
+
         End If
     End Sub
     Private Function CheckTop(ByVal Col As Integer) As Boolean
@@ -455,6 +469,80 @@
 
         Else
             If FirstPlayer = True Then FirstPlayer = False Else FirstPlayer = True
+        End If
+    End Sub
+
+    Private Sub AIToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Main_Menu_AI.Click
+        If Playing = False Then
+            If Main_Menu_AI.Checked = True Then
+                Main_Menu_AI.Checked = False
+                DoAutomatedIdiocy = False
+
+                MainMenu_Settings_FirstPlayer_P1.Checked = True
+
+                MainMenu_Settings_FirstPlayer_Alternator.Checked = False
+                MainMenu_Settings_FirstPlayer_Alternator.Enabled = True
+                MainMenu_Settings_FirstPlayer_P2.Checked = False
+                MainMenu_Settings_FirstPlayer_P2.Enabled = True
+                MainMenu_Settings_FirstPlayer_Random.Checked = False
+                MainMenu_Settings_FirstPlayer_Random.Enabled = True
+
+                Game.P2Name = "Player 2"
+                LblP2Name.Text = Game.P2Name
+            Else
+                Main_Menu_AI.Checked = True
+                DoAutomatedIdiocy = True
+
+                MainMenu_Settings_FirstPlayer_P1.Checked = True
+
+                MainMenu_Settings_FirstPlayer_Alternator.Checked = False
+                MainMenu_Settings_FirstPlayer_Alternator.Enabled = False
+                MainMenu_Settings_FirstPlayer_P2.Checked = False
+                MainMenu_Settings_FirstPlayer_P2.Enabled = False
+                MainMenu_Settings_FirstPlayer_Random.Checked = False
+                MainMenu_Settings_FirstPlayer_Random.Enabled = False
+
+                If BetaAIToolStripMenuItem.Checked = False Then
+                    Game.P2Name = "Automated Idiot"
+                Else
+                    Game.P2Name = "Advanced Intelligent"
+                End If
+                LblP2Name.Text = Game.P2Name
+            End If
+        End If
+    End Sub
+
+    Private Function DoAIMove()
+        If BetaAIToolStripMenuItem.Checked = False Then
+            Dim PossibleMove As Integer = CInt(Math.Floor((7 * Rnd()))) ' + 0))
+            Dim Accepted As Boolean = False
+            While Accepted = False
+                If CheckTop(PossibleMove) = False Then Accepted = True Else PossibleMove = CInt(Math.Floor((7 * Rnd()))) ' + 0))
+            End While
+
+            Game.Board(PossibleMove, 0) = 9
+            Return PossibleMove + 1
+        Else
+            'Dim PossibleMove As Integer = CInt(Int((6 * Rnd()) + 0))
+            'Dim Accepted As Boolean = False
+            'While Accepted = False
+            '    If CheckTop(PossibleMove) = False Then Accepted = True Else PossibleMove = CInt(Int((6 * Rnd()) + 0))
+            'End While
+
+            'Game.Board(PossibleMove, 0) = 9
+            'Return PossibleMove + 1
+        End If
+
+    End Function
+
+    Private Sub BetaAIToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BetaAIToolStripMenuItem.Click
+        If Playing = False Then
+            If BetaAIToolStripMenuItem.Checked = True Then
+                BetaAIToolStripMenuItem.Checked = False
+            Else
+                MsgBox("Advanced Intelligent is not ready. Sorry")
+                'BetaAIToolStripMenuItem.Checked = True
+            End If
         End If
     End Sub
 End Class

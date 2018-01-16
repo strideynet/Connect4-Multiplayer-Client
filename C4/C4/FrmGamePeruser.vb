@@ -123,8 +123,8 @@
 
 
         Catch ERR As Exception
-            MsgBox(ERR.ToString())
-            UpdateStatus("Error: " & ERR.ToString(), True, Color.Firebrick)
+            'MsgBox(ERR.ToString())
+            UpdateStatus("Error: Ded", True, Color.Firebrick)
         End Try
     End Sub
 
@@ -152,4 +152,7 @@
         End If
     End Sub
 
+    Private Sub LblMiniTips_Click(sender As Object, e As EventArgs) Handles LblMiniTips.Click
+        ChangeToolTip()
+    End Sub
 End Class

@@ -91,20 +91,21 @@ Partial Class FrmGamePeruser
         '
         Me.ExitToMenuToolStripMenuItem.Name = "ExitToMenuToolStripMenuItem"
         Me.ExitToMenuToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.[End]), System.Windows.Forms.Keys)
-        Me.ExitToMenuToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
+        Me.ExitToMenuToolStripMenuItem.Size = New System.Drawing.Size(235, 22)
         Me.ExitToMenuToolStripMenuItem.Text = "Exit to menu"
         '
         'LeaderboardsToolStripMenuItem
         '
         Me.LeaderboardsToolStripMenuItem.Name = "LeaderboardsToolStripMenuItem"
         Me.LeaderboardsToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.L), System.Windows.Forms.Keys)
-        Me.LeaderboardsToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
+        Me.LeaderboardsToolStripMenuItem.Size = New System.Drawing.Size(235, 22)
         Me.LeaderboardsToolStripMenuItem.Text = "Leaderboards"
         '
         'DeploySmoothMusicToolStripMenuItem
         '
         Me.DeploySmoothMusicToolStripMenuItem.Name = "DeploySmoothMusicToolStripMenuItem"
-        Me.DeploySmoothMusicToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
+        Me.DeploySmoothMusicToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.M), System.Windows.Forms.Keys)
+        Me.DeploySmoothMusicToolStripMenuItem.Size = New System.Drawing.Size(235, 22)
         Me.DeploySmoothMusicToolStripMenuItem.Text = "Deploy smooth music"
         '
         'HelpToolStripMenuItem
@@ -118,7 +119,7 @@ Partial Class FrmGamePeruser
         '
         Me.GetHelpToolStripMenuItem.Name = "GetHelpToolStripMenuItem"
         Me.GetHelpToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1
-        Me.GetHelpToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
+        Me.GetHelpToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.GetHelpToolStripMenuItem.Text = "Get Help"
         '
         'BtnLeaderboards
@@ -162,7 +163,7 @@ Partial Class FrmGamePeruser
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(384, 191)
+        Me.ClientSize = New System.Drawing.Size(384, 192)
         Me.Controls.Add(Me.LblSpinnerRight)
         Me.Controls.Add(Me.LblSpinnerLeft)
         Me.Controls.Add(Me.BtnLeaderboards)

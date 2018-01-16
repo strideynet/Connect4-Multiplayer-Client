@@ -20,7 +20,10 @@
     End Sub
 
     Private Sub OKButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OKButton.Click
+        FrmEntry.Show()
         Me.Close()
+    End Sub
+    Private Sub OnFormDidClose() Handles Me.FormClosed
         FrmEntry.Show()
     End Sub
 
