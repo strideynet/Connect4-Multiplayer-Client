@@ -2,7 +2,7 @@
 Class MPlayerConnection
 
     Private WithEvents MyClientWebSocket As WebSocketSharp.WebSocket
-    Private JWT As String
+    Private JWT As String = ""
     Public ControlForm As Object
 
     Public Sub New(URL As String, Username As String, Optional ByVal ReferenceForm As FrmGamePeruser = Nothing)
@@ -43,18 +43,37 @@ Class MPlayerConnection
             ElseIf CStr(MSG("type")) = "MatchEnd" Then
                 'Debug.WriteLine("MatchEnd Message!")
                 EndMatchHandler(MSG)
+            ElseIf CStr(MSG("type")) = "C4Ping" Then
+                C4PongReturner(MSG)
             End If
 
         End If
 
     End Sub
 
+    Private Delegate Sub CCDelegate()
     Public Sub CloseConnection()
-        MyClientWebSocket.Close()
-        FrmGamePeruser.UpdateStatus("Connection closed", False, Color.FromKnownColor(KnownColor.Control))
+        If ControlForm.InvokeRequired = True Then
+            ControlForm.BeginInvoke(New CCDelegate(AddressOf CloseConnection))
+        Else
+            MyClientWebSocket.Close()
+            FrmGamePeruser.UpdateStatus("Connection closed", False, Color.FromKnownColor(KnownColor.Control))
+        End If
     End Sub
 
 #Region "MSG return handlers"
+
+    Private Sub C4PongReturner(MSG As Object)
+        If ControlForm.InvokeRequired = True Then
+            'Debug.WriteLine("PingPong handler got invoked!")
+            ControlForm.BeginInvoke(New GenericDelegate(AddressOf C4PongReturner), New Object() {MSG})
+        Else
+            'Debug.WriteLine("Invoke complete")
+            Dim Pong As New C4.MSGTypes.C4Pong(Me.JWT)
+            MyClientWebSocket.Send(Json.JsonConvert.SerializeObject(Pong))
+        End If
+
+    End Sub
 
     Private Sub RegistrationReturnHandler(MSG As Object)
         'If ControlForm.InvokeRequired = True Then
@@ -62,10 +81,10 @@ Class MPlayerConnection
         '    ControlForm.BeginInvoke(New GenericDelegate(AddressOf RegistrationReturnHandler), New Object() {MSG})
         'Else
         JWT = MSG("data")("jwt")
-            Debug.WriteLine("Registered!")
-            FrmGamePeruser.UpdateStatus("MatchMaking requested", False, Color.LightBlue)
-            Dim Reply = New C4.MSGTypes.MatchRequest(JWT) ' Request matchmaking
-            MyClientWebSocket.Send(Json.JsonConvert.SerializeObject(Reply))
+        'Debug.WriteLine("Registered!")
+        FrmGamePeruser.UpdateStatus("MatchMaking requested", False, Color.LightBlue)
+        Dim Reply = New C4.MSGTypes.MatchRequest(JWT) ' Request matchmaking
+        MyClientWebSocket.Send(Json.JsonConvert.SerializeObject(Reply))
         'End If
     End Sub
 
@@ -124,10 +143,6 @@ Class MPlayerConnection
         MyClientWebSocket.Send(Json.JsonConvert.SerializeObject(MSG))
     End Sub
 
-    Public Sub InformConnectionEnd()
-        ' do this
-    End Sub
-
     Public Sub SendChat(ByVal ChatMSG As String)
 
         Dim MSGToSend As New C4.MSGTypes.ChatMessage(Me.JWT, ChatMSG)
@@ -141,12 +156,9 @@ Class MPlayerConnection
 
         ' inform the server about stuff then exit
         If MyClientWebSocket.ReadyState <> WebSocketSharp.WebSocketState.Closed Then
-            InformConnectionEnd()
 
             ExternalVars.Connection.CloseConnection()
         End If
-
-
 
     End Sub
 

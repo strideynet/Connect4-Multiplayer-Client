@@ -66,7 +66,7 @@ Partial Class FrmInfo
         Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
         Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
-        Me.TableLayoutPanel.Size = New System.Drawing.Size(396, 259)
+        Me.TableLayoutPanel.Size = New System.Drawing.Size(396, 258)
         Me.TableLayoutPanel.TabIndex = 0
         '
         'LogoPictureBox
@@ -76,7 +76,7 @@ Partial Class FrmInfo
         Me.LogoPictureBox.Location = New System.Drawing.Point(3, 3)
         Me.LogoPictureBox.Name = "LogoPictureBox"
         Me.TableLayoutPanel.SetRowSpan(Me.LogoPictureBox, 6)
-        Me.LogoPictureBox.Size = New System.Drawing.Size(124, 253)
+        Me.LogoPictureBox.Size = New System.Drawing.Size(124, 252)
         Me.LogoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.LogoPictureBox.TabIndex = 0
         Me.LogoPictureBox.TabStop = False
@@ -147,7 +147,7 @@ Partial Class FrmInfo
         '
         Me.OKButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.OKButton.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.OKButton.Location = New System.Drawing.Point(318, 233)
+        Me.OKButton.Location = New System.Drawing.Point(318, 232)
         Me.OKButton.Name = "OKButton"
         Me.OKButton.Size = New System.Drawing.Size(75, 23)
         Me.OKButton.TabIndex = 0
@@ -158,7 +158,7 @@ Partial Class FrmInfo
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.OKButton
-        Me.ClientSize = New System.Drawing.Size(414, 277)
+        Me.ClientSize = New System.Drawing.Size(414, 276)
         Me.Controls.Add(Me.TableLayoutPanel)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False

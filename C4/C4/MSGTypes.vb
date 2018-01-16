@@ -24,6 +24,15 @@
 
 #End Region
 
+    Class C4Pong : Inherits AuthenticatedMessageShell
+        Public Shadows data As DataStructure
+
+        Public Sub New(JWT As String)
+            MyBase.New(JWT)
+        End Sub
+
+    End Class
+
     Class Registration : Inherits MessageShell
 
         Public Shadows Structure DataStructure
