@@ -154,10 +154,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="OnlineGameDetails.vb" />
-    <Compile Include="SS.Designer.vb">
-      <DependentUpon>SS.vb</DependentUpon>
+    <Compile Include="FrmSS.Designer.vb">
+      <DependentUpon>FrmSS.vb</DependentUpon>
     </Compile>
-    <Compile Include="SS.vb">
+    <Compile Include="FrmSS.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Themes.vb" />
@@ -187,8 +187,8 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="SS.resx">
-      <DependentUpon>SS.vb</DependentUpon>
+    <EmbeddedResource Include="FrmSS.resx">
+      <DependentUpon>FrmSS.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

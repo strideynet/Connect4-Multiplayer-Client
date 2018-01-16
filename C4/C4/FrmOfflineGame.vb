@@ -208,7 +208,15 @@
         End If
     End Sub
     Private Function CheckTop(ByVal Col As Integer) As Boolean
-        If Game.Board(Col, 0) = 0 Then Return False Else MsgBox("This column is obviously full. Please try another one", , "FAILURE") : Return True
+        If Game.Board(Col, 0) = 0 Then
+            Return False
+        Else
+            If Not (DoAutomatedIdiocy = True And Game.PlayerTurn = False) Then
+                MsgBox("This column is obviously full. Please try another one", , "FAILURE")
+
+            End If
+            Return True
+        End If
     End Function
 
     Private Function CheckWin() As String

@@ -182,6 +182,10 @@
 
         Themes.ChangeTheme(NewTheme, , Game)
 
+        LblP1Name.BackColor = Game.P1Colour
+        If LblP1Name.BackColor = Color.Black Then LblP1Name.ForeColor = Color.White Else LblP1Name.ForeColor = Color.Black
+        LblP2Name.BackColor = Game.P2Colour
+        If LblP2Name.BackColor = Color.Black Then LblP2Name.ForeColor = Color.White Else LblP2Name.ForeColor = Color.Black
         PnlBoard.BackColor = My.Settings.BoardColour
 
         DoRedraw = True
@@ -211,7 +215,7 @@
 
         'Debug.WriteLine("LocalNumber: " & CStr(ExternalVars.LocalNumber))
         Game = New OnlineGame(ExternalVars.LocalNumber)
-
+        Debug.WriteLine(LocalNumber)
         LblP1Name.Text = "Player 1: " & Game.P1Name
         LblP2Name.Text = "Player 2: " & Game.P2Name
 
@@ -223,11 +227,23 @@
 
         If Game.MyTurn = True Then
             LblCurrentTurn.Text = "It's your turn"
+            If Game.LocalNum = 1 Then
+                LblCurrentTurn.BackColor = Game.P1Colour
+            Else
+                LblCurrentTurn.BackColor = Game.P2Colour
+            End If
             'Debug.WriteLine("I start")
         Else
             LblCurrentTurn.Text = "It's " & ExternalVars.OpponentName & "'s turn"
+            If Game.LocalNum = 10 Then
+                LblCurrentTurn.BackColor = Game.P1Colour
+            Else
+                LblCurrentTurn.BackColor = Game.P2Colour
+            End If
             'Debug.WriteLine("They start")
         End If
+
+        If LblCurrentTurn.BackColor = Color.Black Then LblCurrentTurn.ForeColor = Color.White Else LblCurrentTurn.ForeColor = Color.Black
     End Sub
 
     Public Sub ReceiveTurn(MSG As Object)
@@ -241,10 +257,21 @@
         'Debug.WriteLine(Game.MyTurn)
         If Game.MyTurn = True Then
             LblCurrentTurn.Text = "It's your turn"
+            If Game.LocalNum = 1 Then
+                LblCurrentTurn.BackColor = Game.P1Colour
+            Else
+                LblCurrentTurn.BackColor = Game.P2Colour
+            End If
         Else
             LblCurrentTurn.Text = "It's " & ExternalVars.OpponentName & "'s turn"
+            If Game.LocalNum = 10 Then
+                LblCurrentTurn.BackColor = Game.P1Colour
+            Else
+                LblCurrentTurn.BackColor = Game.P2Colour
+            End If
         End If
 
+        If LblCurrentTurn.BackColor = Color.Black Then LblCurrentTurn.ForeColor = Color.White Else LblCurrentTurn.ForeColor = Color.Black
 
         DoRedraw = True
         PnlBoard.Refresh()
@@ -291,5 +318,8 @@
         MsgBox("Was the pressure getting to you?" & vbCrLf & "You lose by submission", , "DEFEAT")
         FrmEntry.Show()
         Me.Close()
+    End Sub
+    Private Sub OnFormCloses() Handles Me.FormClosed
+        ExternalVars.Connection.CloseConnection()
     End Sub
 End Class
