@@ -24,7 +24,6 @@ Partial Class FrmMPlayerGame
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmMPlayerGame))
         Me.PnlBoard = New System.Windows.Forms.Panel()
-        Me.TxtChatHistory = New System.Windows.Forms.TextBox()
         Me.TxtChatSender = New System.Windows.Forms.TextBox()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.MenuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -43,6 +42,7 @@ Partial Class FrmMPlayerGame
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.LblP2Name = New System.Windows.Forms.Label()
         Me.LblP1Name = New System.Windows.Forms.Label()
+        Me.TxtChatHistory = New System.Windows.Forms.RichTextBox()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -56,17 +56,6 @@ Partial Class FrmMPlayerGame
         Me.PnlBoard.Name = "PnlBoard"
         Me.PnlBoard.Size = New System.Drawing.Size(427, 352)
         Me.PnlBoard.TabIndex = 0
-        '
-        'TxtChatHistory
-        '
-        Me.TxtChatHistory.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtChatHistory.Location = New System.Drawing.Point(445, 106)
-        Me.TxtChatHistory.Multiline = True
-        Me.TxtChatHistory.Name = "TxtChatHistory"
-        Me.TxtChatHistory.ReadOnly = True
-        Me.TxtChatHistory.Size = New System.Drawing.Size(235, 247)
-        Me.TxtChatHistory.TabIndex = 1
         '
         'TxtChatSender
         '
@@ -205,15 +194,25 @@ Partial Class FrmMPlayerGame
         Me.LblP1Name.Text = "Player 1: "
         Me.LblP1Name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'TxtChatHistory
+        '
+        Me.TxtChatHistory.Location = New System.Drawing.Point(445, 106)
+        Me.TxtChatHistory.Name = "TxtChatHistory"
+        Me.TxtChatHistory.ReadOnly = True
+        Me.TxtChatHistory.Size = New System.Drawing.Size(235, 247)
+        Me.TxtChatHistory.TabIndex = 7
+        Me.TxtChatHistory.Text = ""
+        '
         'FrmMPlayerGame
         '
+        Me.AcceptButton = Me.BtnSendChat
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(692, 391)
+        Me.Controls.Add(Me.TxtChatHistory)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.BtnSendChat)
         Me.Controls.Add(Me.TxtChatSender)
-        Me.Controls.Add(Me.TxtChatHistory)
         Me.Controls.Add(Me.PnlBoard)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -229,7 +228,6 @@ Partial Class FrmMPlayerGame
     End Sub
 
     Friend WithEvents PnlBoard As Panel
-    Friend WithEvents TxtChatHistory As TextBox
     Friend WithEvents TxtChatSender As TextBox
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents MenuToolStripMenuItem As ToolStripMenuItem
@@ -248,4 +246,5 @@ Partial Class FrmMPlayerGame
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents LblP2Name As System.Windows.Forms.Label
     Friend WithEvents LblP1Name As System.Windows.Forms.Label
+    Friend WithEvents TxtChatHistory As RichTextBox
 End Class

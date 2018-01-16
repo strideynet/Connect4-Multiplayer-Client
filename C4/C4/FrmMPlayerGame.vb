@@ -287,9 +287,11 @@
     End Sub
 
     Private Sub BtnSendChat_Click(sender As Object, e As EventArgs) Handles BtnSendChat.Click
-        Dim TxtToSend As String = TxtChatSender.Text
-        TxtChatSender.Text = ""
-        ExternalVars.Connection.SendChat(TxtToSend)
+        If TxtChatSender.Text <> "" Then
+            Dim TxtToSend As String = TxtChatSender.Text
+            TxtChatSender.Text = ""
+            ExternalVars.Connection.SendChat(TxtToSend)
+        End If
     End Sub
 
     Public Sub ReceiveChat(ByVal MSG As Object)
