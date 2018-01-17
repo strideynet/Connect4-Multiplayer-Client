@@ -64,14 +64,14 @@ Class MPlayerConnection
 #Region "MSG return handlers"
 
     Private Sub C4PongReturner(MSG As Object)
-        If ControlForm.InvokeRequired = True Then
-            'Debug.WriteLine("PingPong handler got invoked!")
-            ControlForm.BeginInvoke(New GenericDelegate(AddressOf C4PongReturner), New Object() {MSG})
-        Else
-            'Debug.WriteLine("Invoke complete")
-            Dim Pong As New C4.MSGTypes.C4Pong(Me.JWT)
-            MyClientWebSocket.Send(Json.JsonConvert.SerializeObject(Pong))
-        End If
+        'If ControlForm.InvokeRequired = True Then
+        '    'Debug.WriteLine("PingPong handler got invoked!")
+        '    ControlForm.BeginInvoke(New GenericDelegate(AddressOf C4PongReturner), New Object() {MSG})
+        'Else
+        '    Debug.WriteLine("Invoke complete")
+        Dim Pong As New C4.MSGTypes.C4Pong(Me.JWT)
+        MyClientWebSocket.Send(Json.JsonConvert.SerializeObject(Pong))
+        'End If
 
     End Sub
 

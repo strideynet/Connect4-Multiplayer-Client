@@ -304,7 +304,7 @@
             FrmEntry.Show()
             Me.Close()
         Else
-            MsgBox("You win!" & vbCrLf & "The world shall sing your praises for decades to come", , "DEFEAT")
+            MsgBox("You Lose." & vbCrLf & "May shame forever be present within you", , "DEFEAT")
             FrmEntry.Show()
             Me.Close()
         End If
