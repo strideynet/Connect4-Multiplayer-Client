@@ -196,6 +196,8 @@ Partial Class FrmMPlayerGame
         '
         'TxtChatHistory
         '
+        Me.TxtChatHistory.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtChatHistory.Location = New System.Drawing.Point(445, 106)
         Me.TxtChatHistory.Name = "TxtChatHistory"
         Me.TxtChatHistory.ReadOnly = True
