@@ -34,7 +34,7 @@ Partial Class FrmOffline
         Me.Lbl1 = New System.Windows.Forms.Label()
         Me.LblCurrentTurn = New System.Windows.Forms.Label()
         Me.LblPrevMoveDetails = New System.Windows.Forms.Label()
-        Me.MainMenuStrip = New System.Windows.Forms.MenuStrip()
+        Me.MainMenu = New System.Windows.Forms.MenuStrip()
         Me.MainMenu_Menu = New System.Windows.Forms.ToolStripMenuItem()
         Me.MainMenu_Main_Exit = New System.Windows.Forms.ToolStripMenuItem()
         Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -50,6 +50,8 @@ Partial Class FrmOffline
         Me.MainMenu_Settings_FirstPlayer_Random = New System.Windows.Forms.ToolStripMenuItem()
         Me.MainMenu_Settings_FirstPlayer_Alternator = New System.Windows.Forms.ToolStripMenuItem()
         Me.Main_Menu_AI = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BetaAIToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SpeechSynthesisToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MainMenu_Help = New System.Windows.Forms.ToolStripMenuItem()
         Me.GetHelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CntxtMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -57,10 +59,9 @@ Partial Class FrmOffline
         Me.Cntxt_Settings = New System.Windows.Forms.ToolStripMenuItem()
         Me.Cntxt_Exit = New System.Windows.Forms.ToolStripMenuItem()
         Me.Cntxt_Help = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BetaAIToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TblPnlMain.SuspendLayout()
         Me.TblPnlInfo.SuspendLayout()
-        Me.MainMenuStrip.SuspendLayout()
+        Me.MainMenu.SuspendLayout()
         Me.CntxtMenu.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -184,14 +185,14 @@ Partial Class FrmOffline
         Me.LblPrevMoveDetails.TabIndex = 3
         Me.LblPrevMoveDetails.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'MainMenuStrip
+        'MainMenu
         '
-        Me.MainMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MainMenu_Menu, Me.MainMenu_Help})
-        Me.MainMenuStrip.Location = New System.Drawing.Point(0, 0)
-        Me.MainMenuStrip.Name = "MainMenuStrip"
-        Me.MainMenuStrip.Size = New System.Drawing.Size(581, 24)
-        Me.MainMenuStrip.TabIndex = 2
-        Me.MainMenuStrip.Text = "Main Menu"
+        Me.MainMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MainMenu_Menu, Me.MainMenu_Help})
+        Me.MainMenu.Location = New System.Drawing.Point(0, 0)
+        Me.MainMenu.Name = "MainMenu"
+        Me.MainMenu.Size = New System.Drawing.Size(581, 24)
+        Me.MainMenu.TabIndex = 2
+        Me.MainMenu.Text = "Main Menu"
         '
         'MainMenu_Menu
         '
@@ -208,7 +209,7 @@ Partial Class FrmOffline
         '
         'SettingsToolStripMenuItem
         '
-        Me.SettingsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ThemesToolStripMenuItem, Me.StPlayerToolStripMenuItem, Me.Main_Menu_AI, Me.BetaAIToolStripMenuItem})
+        Me.SettingsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ThemesToolStripMenuItem, Me.StPlayerToolStripMenuItem, Me.Main_Menu_AI, Me.BetaAIToolStripMenuItem, Me.SpeechSynthesisToolStripMenuItem})
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
         Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.SettingsToolStripMenuItem.Text = "Settings"
@@ -217,7 +218,7 @@ Partial Class FrmOffline
         '
         Me.ThemesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MainMenu_Settings_Themes_Basic, Me.MainMenu_Settings_Themes_Blueberry, Me.MainMenu_Settings_Themes_Monochroma, Me.MainMenu_Settings_Themes_Peach, Me.MainMenu_Settings_Themes_Stone})
         Me.ThemesToolStripMenuItem.Name = "ThemesToolStripMenuItem"
-        Me.ThemesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ThemesToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
         Me.ThemesToolStripMenuItem.Text = "Themes"
         '
         'MainMenu_Settings_Themes_Basic
@@ -254,7 +255,7 @@ Partial Class FrmOffline
         '
         Me.StPlayerToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MainMenu_Settings_FirstPlayer_P1, Me.MainMenu_Settings_FirstPlayer_P2, Me.MainMenu_Settings_FirstPlayer_Random, Me.MainMenu_Settings_FirstPlayer_Alternator})
         Me.StPlayerToolStripMenuItem.Name = "StPlayerToolStripMenuItem"
-        Me.StPlayerToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.StPlayerToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
         Me.StPlayerToolStripMenuItem.Text = "1st Player"
         '
         'MainMenu_Settings_FirstPlayer_P1
@@ -284,8 +285,22 @@ Partial Class FrmOffline
         'Main_Menu_AI
         '
         Me.Main_Menu_AI.Name = "Main_Menu_AI"
-        Me.Main_Menu_AI.Size = New System.Drawing.Size(152, 22)
+        Me.Main_Menu_AI.Size = New System.Drawing.Size(164, 22)
         Me.Main_Menu_AI.Text = "AI"
+        '
+        'BetaAIToolStripMenuItem
+        '
+        Me.BetaAIToolStripMenuItem.Name = "BetaAIToolStripMenuItem"
+        Me.BetaAIToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
+        Me.BetaAIToolStripMenuItem.Text = "Beta AI"
+        '
+        'SpeechSynthesisToolStripMenuItem
+        '
+        Me.SpeechSynthesisToolStripMenuItem.Checked = True
+        Me.SpeechSynthesisToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.SpeechSynthesisToolStripMenuItem.Name = "SpeechSynthesisToolStripMenuItem"
+        Me.SpeechSynthesisToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
+        Me.SpeechSynthesisToolStripMenuItem.Text = "Speech Synthesis"
         '
         'MainMenu_Help
         '
@@ -331,12 +346,6 @@ Partial Class FrmOffline
         Me.Cntxt_Help.Size = New System.Drawing.Size(154, 22)
         Me.Cntxt_Help.Text = "Help"
         '
-        'BetaAIToolStripMenuItem
-        '
-        Me.BetaAIToolStripMenuItem.Name = "BetaAIToolStripMenuItem"
-        Me.BetaAIToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.BetaAIToolStripMenuItem.Text = "Beta AI"
-        '
         'FrmOffline
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -344,7 +353,7 @@ Partial Class FrmOffline
         Me.ClientSize = New System.Drawing.Size(581, 335)
         Me.Controls.Add(Me.TblPnlMain)
         Me.Controls.Add(Me.PnlBoard)
-        Me.Controls.Add(Me.MainMenuStrip)
+        Me.Controls.Add(Me.MainMenu)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
         Me.MaximizeBox = False
@@ -355,8 +364,8 @@ Partial Class FrmOffline
         Me.TblPnlMain.ResumeLayout(False)
         Me.TblPnlMain.PerformLayout()
         Me.TblPnlInfo.ResumeLayout(False)
-        Me.MainMenuStrip.ResumeLayout(False)
-        Me.MainMenuStrip.PerformLayout()
+        Me.MainMenu.ResumeLayout(False)
+        Me.MainMenu.PerformLayout()
         Me.CntxtMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -364,7 +373,7 @@ Partial Class FrmOffline
     End Sub
     Friend WithEvents PnlBoard As System.Windows.Forms.Panel
     Friend WithEvents TblPnlMain As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents MainMenuStrip As System.Windows.Forms.MenuStrip
+    Friend WithEvents MainMenu As System.Windows.Forms.MenuStrip
     Friend WithEvents MainMenu_Menu As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MainMenu_Help As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents BtnStartStop As System.Windows.Forms.Button
@@ -396,4 +405,5 @@ Partial Class FrmOffline
     Friend WithEvents MainMenu_Settings_FirstPlayer_Alternator As ToolStripMenuItem
     Friend WithEvents Main_Menu_AI As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents BetaAIToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SpeechSynthesisToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class
