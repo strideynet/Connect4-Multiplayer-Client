@@ -27,7 +27,7 @@ Partial Class FrmGamePeruser
         Me.LblStatus = New System.Windows.Forms.Label()
         Me.LblMiniTips = New System.Windows.Forms.Label()
         Me.BtnSearchQuitSearch = New System.Windows.Forms.Button()
-        Me.Menu = New System.Windows.Forms.MenuStrip()
+        Me.MainMenu = New System.Windows.Forms.MenuStrip()
         Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToMenuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LeaderboardsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -39,7 +39,7 @@ Partial Class FrmGamePeruser
         Me.LblSpinnerLeft = New System.Windows.Forms.Label()
         Me.LblSpinnerRight = New System.Windows.Forms.Label()
         Me.SpinnerTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.Menu.SuspendLayout()
+        Me.MainMenu.SuspendLayout()
         Me.SuspendLayout()
         '
         'LblStatus
@@ -71,14 +71,14 @@ Partial Class FrmGamePeruser
         Me.BtnSearchQuitSearch.Text = "Begin Search"
         Me.BtnSearchQuitSearch.UseVisualStyleBackColor = True
         '
-        'Menu
+        'MainMenu
         '
-        Me.Menu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OptionsToolStripMenuItem, Me.HelpToolStripMenuItem})
-        Me.Menu.Location = New System.Drawing.Point(0, 0)
-        Me.Menu.Name = "Menu"
-        Me.Menu.Size = New System.Drawing.Size(384, 24)
-        Me.Menu.TabIndex = 3
-        Me.Menu.Text = "MenuStrip1"
+        Me.MainMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OptionsToolStripMenuItem, Me.HelpToolStripMenuItem})
+        Me.MainMenu.Location = New System.Drawing.Point(0, 0)
+        Me.MainMenu.Name = "MainMenu"
+        Me.MainMenu.Size = New System.Drawing.Size(384, 24)
+        Me.MainMenu.TabIndex = 3
+        Me.MainMenu.Text = "MainMenu"
         '
         'OptionsToolStripMenuItem
         '
@@ -119,7 +119,7 @@ Partial Class FrmGamePeruser
         '
         Me.GetHelpToolStripMenuItem.Name = "GetHelpToolStripMenuItem"
         Me.GetHelpToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1
-        Me.GetHelpToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.GetHelpToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
         Me.GetHelpToolStripMenuItem.Text = "Get Help"
         '
         'BtnLeaderboards
@@ -170,16 +170,16 @@ Partial Class FrmGamePeruser
         Me.Controls.Add(Me.BtnSearchQuitSearch)
         Me.Controls.Add(Me.LblMiniTips)
         Me.Controls.Add(Me.LblStatus)
-        Me.Controls.Add(Me.Menu)
+        Me.Controls.Add(Me.MainMenu)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.MainMenuStrip = Me.Menu
+        Me.MainMenuStrip = Me.MainMenu
         Me.MaximizeBox = False
         Me.MaximumSize = New System.Drawing.Size(400, 230)
         Me.MinimumSize = New System.Drawing.Size(400, 230)
         Me.Name = "FrmGamePeruser"
         Me.Text = "GamePeruser"
-        Me.Menu.ResumeLayout(False)
-        Me.Menu.PerformLayout()
+        Me.MainMenu.ResumeLayout(False)
+        Me.MainMenu.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -187,7 +187,7 @@ Partial Class FrmGamePeruser
     Friend WithEvents LblStatus As System.Windows.Forms.Label
     Friend WithEvents LblMiniTips As System.Windows.Forms.Label
     Friend WithEvents BtnSearchQuitSearch As System.Windows.Forms.Button
-    Friend WithEvents Menu As System.Windows.Forms.MenuStrip
+    Friend WithEvents MainMenu As System.Windows.Forms.MenuStrip
     Friend WithEvents OptionsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExitToMenuToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents LeaderboardsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem

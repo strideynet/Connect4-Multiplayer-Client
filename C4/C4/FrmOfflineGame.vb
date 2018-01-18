@@ -191,7 +191,7 @@
             TurnInfoUpdater(ChosenCol)
             PerformGravity()
             Dim VictoryCheck As String = CheckWin()
-            If VictoryCheck <> "NONE" Then MsgBox("The winner is: " & VictoryCheck) : MsgBox("Congratulations!") : BtnStartStop_Click(Nothing, Nothing) : Exit Sub
+            If VictoryCheck <> "NONE" Then DoSpeech("The winner is: " & VictoryCheck) : MsgBox("The winner is: " & VictoryCheck) : MsgBox("Congratulations!") : BtnStartStop_Click(Nothing, Nothing) : Exit Sub
 
             If DoAutomatedIdiocy = True And Game.PlayerTurn = False Then
                 Game.PlayerTurn = True
@@ -199,6 +199,7 @@
                 PerformGravity()
                 VictoryCheck = CheckWin()
                 If VictoryCheck <> "NONE" Then
+                    DoSpeech("The winner is: " & VictoryCheck)
                     MsgBox("The winner is: " & VictoryCheck)
                     MsgBox("Congratulations!")
                     BtnStartStop_Click(Nothing, Nothing)
@@ -341,7 +342,7 @@
         UpdateMainGameTheme("MONOCHROMA")
     End Sub
     Private Sub UpdateMainGameTheme(ByVal NewTheme As String)
-
+        DoSpeech("Theme set to " & NewTheme)
         Themes.ChangeTheme(NewTheme, Game)
 
         LblP1Name.BackColor = My.Settings.P1Colour
@@ -394,6 +395,9 @@
                 Game.P2Name = LblP2Name.Text
             End If
             LblP2Name.Text = Game.P2Name
+
+            DoSpeech("Game begun. " & Game.P1Name & " versus " & Game.P2Name)
+
             Playing = True
             TurnInfoUpdater(-1)
         Else
@@ -426,6 +430,7 @@
             Else
                 If Game.PlayerTurn = False Then LblPrevMoveDetails.Text = Game.P1Name Else LblPrevMoveDetails.Text = Game.P2Name
                 LblPrevMoveDetails.Text &= " moved in column " & Column
+                DoSpeech(LblCurrentTurn.Text)
             End If
 
         Else
@@ -497,6 +502,7 @@
 
                 Game.P2Name = "Player 2"
                 LblP2Name.Text = Game.P2Name
+                DoSpeech("AI Deactivated")
             Else
                 Main_Menu_AI.Checked = True
                 DoAutomatedIdiocy = True
@@ -516,6 +522,7 @@
                     Game.P2Name = "Advanced Intelligent"
                 End If
                 LblP2Name.Text = Game.P2Name
+                DoSpeech("AI Activated")
             End If
         End If
     End Sub
@@ -538,7 +545,7 @@
             'End While
 
             'Game.Board(PossibleMove, 0) = 9
-            'Return PossibleMove + 1
+            Return 0
         End If
 
     End Function
@@ -552,5 +559,20 @@
                 'BetaAIToolStripMenuItem.Checked = True
             End If
         End If
+    End Sub
+
+    Private Sub DoSpeech(Text As String)
+        If SpeechSynthesisToolStripMenuItem.Checked = True Then
+            Dim SpeechSynth As New Speech.Synthesis.SpeechSynthesizer()
+            SpeechSynth.SetOutputToDefaultAudioDevice()
+            Dim Prompt As New Speech.Synthesis.PromptBuilder(New Globalization.CultureInfo("en-GB"))
+            Prompt.AppendText(Text.ToLower)
+
+            SpeechSynth.SpeakAsync(Prompt)
+        End If
+    End Sub
+
+    Private Sub SpeechSynthesisToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SpeechSynthesisToolStripMenuItem.Click
+        SpeechSynthesisToolStripMenuItem.Checked = Not (SpeechSynthesisToolStripMenuItem.Checked)
     End Sub
 End Class

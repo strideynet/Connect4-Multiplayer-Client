@@ -127,7 +127,7 @@
 
 
         Catch ERR As Exception
-            'MsgBox(ERR.ToString())
+            MsgBox(ERR.ToString())
             UpdateStatus("Error: Ded", True, Color.Firebrick)
         End Try
     End Sub

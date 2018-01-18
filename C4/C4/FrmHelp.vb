@@ -15,7 +15,18 @@
         "- The 'Start' / 'End' button - Clicking this will prompt you to enter a name for each player. The game begins with the first player." & Environment.NewLine &
         "- The player names - Your names are displayed here, and the colour box around them informs you what colour you are" & Environment.NewLine &
         "- Turn information - The name of the player who is to move" & Environment.NewLine &
-        "- Last turn information - Tells you which column was played last (In case of really slow games)" & Environment.NewLine
+        "- Last turn information - Tells you which column was played last (In case of really slow games)" & Environment.NewLine & _
+        "Settings" & Environment.NewLine &
+        "-> FirstPlayer" & Environment.NewLine &
+        "--> P1: Player 1 Always goes first" & Environment.NewLine &
+        "--> P2: Player 2 Always goes first" & Environment.NewLine &
+        "--> Random: Randomly selects a player to go first" & Environment.NewLine &
+        "--> Alternate: Alternates between P1 and P2" & Environment.NewLine & Environment.NewLine &
+        "AI" & Environment.NewLine &
+        "-> On or Off" & Environment.NewLine &
+        "-- Beta not available" & Environment.NewLine &
+        "Speech" & Environment.NewLine &
+        "Do Speech synthesis. You will end up hating it I promise"
 
     Dim MultiplayerHelpText As String = "ONLINE PLAY" & Environment.NewLine &
         "Clicking 'Play vs. Strangers' will allow you to connect to the internet to play against other people." & Environment.NewLine &
@@ -31,9 +42,8 @@
         "-> Unlike T3, this game actually implements themes in a pretty manner. Use the main menu to change them" & Environment.NewLine &
         "--> Available themes include:" & Environment.NewLine &
         "--- Basic, Blueberry, Monochroma, Peach and Stone" & Environment.NewLine &
-        "Player Selection" & Environment.NewLine &
-        "Use the main menu in offline mode to select who goes first. It's not as hard as you may think" & Environment.NewLine &
-        "In online play, the first player is selected randomly"
+        "F1" & Environment.NewLine &
+        "Use F1 to show this form on all game screens"
 
     Private Sub UpdateHelpText() Handles CbbxSelector.SelectedIndexChanged
         If CbbxSelector.SelectedIndex = 0 Then
