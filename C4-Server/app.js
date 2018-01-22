@@ -357,4 +357,4 @@ const checkAlive = setInterval(function () {
       }
     }
   }
-}, 500);
+}, 1000);
