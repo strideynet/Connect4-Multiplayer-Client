@@ -2,7 +2,7 @@
 const shortid = require('shortid')
 const jwt = require('jsonwebtoken')
 
-const wss = new WebSocket.Server({ port: 80 })
+const wss = new WebSocket.Server({ port: 50000 })
 
 const allPlayers = []
 
