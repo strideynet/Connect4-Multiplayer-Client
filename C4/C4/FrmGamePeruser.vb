@@ -123,7 +123,7 @@
             Dim UsrName As String = InputBox("What's your username?", "C-4: Online Play", "Anonymous Moose")
             If UsrName = "" Or UsrName = Nothing Then UsrName = "Anonymous Guadaloupe"
             ExternalVars.LocalName = UsrName
-            ExternalVars.Connection = New MPlayerConnection("ws://91.134.107.74:80/", UsrName, Me) ' "ws://91.134.107.74:80/" (srvr), "ws://127.0.0.1:80/" (local)
+            ExternalVars.Connection = New MPlayerConnection("ws://91.134.107.74:50000/", UsrName, Me) ' "ws://91.134.107.74:80/" (srvr), "ws://127.0.0.1:80/" (local)
 
 
         Catch ERR As Exception
